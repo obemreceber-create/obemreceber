@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>o bem receber | consultoria e treinamento</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --marrom: #3d2c1d;
@@ -23,7 +22,7 @@
     body {
       background-color: var(--bg);
       color: var(--texto);
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
       line-height: 1.6;
       display: flex;
       flex-direction: column;
@@ -49,9 +48,10 @@
 
     .container { max-width: 1000px; margin: auto; padding: 2rem 1rem; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
 
+    /* Caixa de login ajustada para manter o subtítulo em uma linha só */
     .login-box {
       width: 100%;
-      max-width: 420px;
+      max-width: 480px;
       background: var(--card-bg);
       padding: 2.5rem;
       border-radius: 16px;
@@ -60,7 +60,15 @@
     }
 
     .login-box h2 { text-align: center; margin-bottom: 0.3rem; color: var(--marrom); font-size: 1.8rem; }
-    .login-box p { text-align: center; font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.8rem; }
+    
+    /* Força o texto em uma linha só */
+    .login-box p.subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--caqui);
+      margin-bottom: 1.8rem;
+      white-space: nowrap;
+    }
 
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; color: var(--marrom); }
@@ -70,7 +78,6 @@
       border: 1px solid var(--bege);
       border-radius: 8px;
       font-size: 0.95rem;
-      font-family: 'Montserrat', sans-serif;
       background: var(--aveia);
       color: var(--texto);
     }
@@ -101,22 +108,24 @@
     .quick-title { font-size: 0.8rem; font-weight: 600; color: var(--caqui); margin-bottom: 0.8rem; }
     .quick-btns { display: flex; gap: 0.5rem; }
 
+    /* Botões de atalho sem emojis */
     .btn-role {
       flex: 1;
-      padding: 0.7rem 0.4rem;
-      font-size: 0.8rem;
+      padding: 0.8rem 0.4rem;
+      font-size: 0.85rem;
       background: var(--aveia);
       color: var(--marrom);
       border: 1px solid var(--bege);
-      border-radius: 6px;
+      border-radius: 8px;
       font-weight: 700;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .btn-role:hover { background: var(--caramelo); color: white; }
+    .btn-role:hover { background: var(--caramelo); color: white; border-color: var(--caramelo); }
 
     .nav-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--bege); padding-bottom: 0.5rem; flex-wrap: wrap; }
-    .tab-btn { background: var(--aveia); border: 1px solid var(--bege); padding: 0.6rem 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--marrom); cursor: pointer; border-radius: 6px; }
+    .tab-btn { background: var(--aveia); border: 1px solid var(--bege); padding: 0.6rem 1rem; font-weight: 600; font-size: 0.85rem; color: var(--marrom); cursor: pointer; border-radius: 6px; }
     .tab-btn.active { background: var(--marrom); color: var(--bege); border-color: var(--marrom); }
 
     .card { background: var(--card-bg); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid var(--bege); width: 100%; }
@@ -129,13 +138,12 @@
     table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid var(--bege); }
     th { color: var(--marrom); font-weight: 700; background: var(--aveia); }
-
-    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
-  <header id="appHeader" class="hidden">
+  <!-- CABEÇALHO DA APLICAÇÃO -->
+  <header id="appHeader" style="display: none;">
     <h1 class="brand-title">o bem receber</h1>
     <div style="display: flex; align-items: center; gap: 1rem;">
       <span class="user-info" id="userInfo">usuário: -</span>
@@ -145,10 +153,10 @@
 
   <div class="container">
     
-    <!-- TELA DE LOGIN -->
+    <!-- TELA DE LOGIN (CAPA INICIAL) -->
     <div id="loginScreen" class="login-box">
       <h2 class="brand-title">o bem receber</h2>
-      <p>consultoria e treinamento sobre a arte do bem receber</p>
+      <p class="subtitle">consultoria e treinamento sobre a arte do bem receber</p>
 
       <div class="form-group">
         <label>usuário ou e-mail</label>
@@ -160,58 +168,59 @@
         <input type="password" id="password" placeholder="••••••••">
       </div>
 
-      <button class="btn" onclick="enterAs('manager')">entrar</button>
+      <button class="btn" onclick="openProfile('manager')">entrar</button>
 
+      <!-- BOTÕES DIRETOS SEM EMOJIS -->
       <div class="quick-box">
         <p class="quick-title">escolha o perfil para entrar diretamente:</p>
         <div class="quick-btns">
-          <button class="btn-role" onclick="enterAs('student')">🎓 aluno</button>
-          <button class="btn-role" onclick="enterAs('client')">📊 cliente</button>
-          <button class="btn-role" onclick="enterAs('manager')">🛠️ gestor</button>
+          <button type="button" class="btn-role" onclick="openProfile('student')">aluno</button>
+          <button type="button" class="btn-role" onclick="openProfile('client')">cliente</button>
+          <button type="button" class="btn-role" onclick="openProfile('manager')">gestor</button>
         </div>
       </div>
     </div>
 
-    <!-- PAINEL DO ALUNO -->
-    <div id="studentPanel" class="hidden" style="width: 100%;">
+    <!-- 1. PAINEL DO ALUNO / COLABORADOR -->
+    <div id="studentPanel" style="display: none; width: 100%;">
       <div class="card">
         <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">módulo I & II: o método do bem receber</h2>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem;">etiqueta, postura, comunicação e conduta em itacaré</p>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem;">etiqueta, postura, comunicação assertiva e conduta em itacaré</p>
         
         <div style="margin-bottom: 1rem; background: var(--aveia); padding: 1rem; border-radius: 8px;">
-          <h4 style="color: var(--marrom);">✨ postura & etiqueta visual</h4>
+          <h4 style="color: var(--marrom);">postura & etiqueta visual</h4>
           <p style="font-size: 0.85rem; color: var(--texto);">contato visual acolhedor, sorriso no olhar e postura descontraída condizente com a hospitalidade de itacaré.</p>
         </div>
 
         <div style="margin-bottom: 1rem; background: var(--aveia); padding: 1rem; border-radius: 8px;">
-          <h4 style="color: var(--marrom);">💬 o que falar e como agir</h4>
-          <p style="font-size: 0.85rem; color: var(--texto);">linguagem clara e preventiva. antecipe dúvidas sobre tábuas de maré, trilhas e sugestões gastronômicas.</p>
+          <h4 style="color: var(--marrom);">o que falar e como agir</h4>
+          <p style="font-size: 0.85rem; color: var(--texto);">linguagem clara, respeitosa e preventiva. antecipe dúvidas sobre tábuas de maré, trilhas e sugestões gastronômicas.</p>
         </div>
       </div>
 
       <div class="card">
-        <h3 class="brand-title">⚡ quiz de avaliação prática</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-top: 0.5rem;">cliente pergunta sobre a segurança da trilha da prainha. como agir?</p>
-        
-        <button class="btn" style="margin-top: 1rem; width: auto; padding: 0.6rem 1.2rem;" onclick="alert('resposta enviada com sucesso!')">responder quiz</button>
+        <h3 class="brand-title">quiz de avaliação prática</h3>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-top: 0.5rem;">um cliente pergunta sobre a segurança da trilha da prainha. qual a melhor conduta?</p>
+        <button class="btn" style="margin-top: 1rem; width: auto; padding: 0.6rem 1.2rem;" onclick="alert('resposta registrada no sistema!')">responder quiz</button>
       </div>
     </div>
 
-    <!-- PAINEL DO GESTOR E CLIENTE -->
-    <div id="dashboardPanel" class="hidden" style="width: 100%;">
+    <!-- 2 & 3. PAINEL DO GESTOR E DO CLIENTE -->
+    <div id="dashboardPanel" style="display: none; width: 100%;">
       
+      <!-- MENU DE ABAS HORIZONTAIS -->
       <div class="nav-tabs" id="menuTabs">
-        <button class="tab-btn active" onclick="switchTab('tab-empresas')" id="btn-empresas">🏢 adicionar empresas</button>
-        <button class="tab-btn" onclick="switchTab('tab-choque')" id="btn-choque">⚡ treinamento de choque</button>
-        <button class="tab-btn" onclick="switchTab('tab-auditoria')" id="btn-auditoria">🔍 auditoria de chão de fábrica</button>
-        <button class="tab-btn" onclick="switchTab('tab-analise')" id="btn-analise">📊 motor de análise, ihg & roi</button>
-        <button class="tab-btn" onclick="switchTab('tab-relatorios')" id="btn-relatorios">📄 relatórios & ranking</button>
+        <button class="tab-btn active" onclick="showTab('tab-empresas', this)" id="btn-empresas">adicionar empresas</button>
+        <button class="tab-btn" onclick="showTab('tab-choque', this)" id="btn-choque">treinamento de choque</button>
+        <button class="tab-btn" onclick="showTab('tab-auditoria', this)" id="btn-auditoria">auditoria de chão de fábrica</button>
+        <button class="tab-btn" onclick="showTab('tab-analise', this)" id="btn-analise">motor de análise, ihg & roi</button>
+        <button class="tab-btn" onclick="showTab('tab-relatorios', this)" id="btn-relatorios">relatórios & ranking</button>
       </div>
 
-      <!-- ABA EMPRESAS -->
+      <!-- ABA: ADICIONAR EMPRESAS -->
       <div id="tab-empresas" class="tab-content card">
         <h3 class="brand-title">alimentar dados das empresas parceiras</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">cadastre hotéis, pousadas e restaurantes em itacaré.</p>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">cadastre hotéis, pousadas e restaurantes em itacaré para planejar a consultoria.</p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
           <div class="form-group"><label>nome do estabelecimento</label><input type="text" id="compName" placeholder="ex: pousada mares de itacaré"></div>
           <div class="form-group"><label>ticket médio estimado (r$)</label><input type="text" id="compTicket" placeholder="ex: 180.00"></div>
@@ -229,90 +238,99 @@
         </div>
       </div>
 
-      <!-- ABA TREINAMENTO DE CHOQUE -->
-      <div id="tab-choque" class="tab-content card hidden">
+      <!-- ABA: TREINAMENTO DE CHOQUE -->
+      <div id="tab-choque" class="tab-content card" style="display: none;">
         <h3 class="brand-title">módulo iii: registro do treinamento de choque</h3>
         <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">documentação do engajamento e teatro da hospitalidade (roleplay).</p>
         <div class="form-group"><label>observações do comportamento da equipe</label><textarea rows="3" placeholder="anote os líderes positivos e funcionários resistentes..."></textarea></div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('salvo com sucesso!')">salvar registro</button>
+        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('salvo com sucesso!')">salvar registro de choque</button>
       </div>
 
-      <!-- ABA AUDITORIA -->
-      <div id="tab-auditoria" class="tab-content card hidden">
+      <!-- ABA: AUDITORIA -->
+      <div id="tab-auditoria" class="tab-content card" style="display: none;">
         <h3 class="brand-title">módulo iv: auditoria de chão de fábrica</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">aplicado 15 e 30 dias após o treinamento.</p>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">formulário aplicado 15 e 30 dias após o treinamento para medir a retenção.</p>
         <div class="form-group"><label>acolhimento imediato e sorriso no olhar (0 a 10)</label><input type="number" placeholder="ex: 9"></div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('auditoria salva!')">enviar auditoria</button>
+        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('auditoria enviada com sucesso!')">enviar auditoria</button>
       </div>
 
-      <!-- ABA ANÁLISE / IHG / ROI -->
-      <div id="tab-analise" class="tab-content card hidden">
+      <!-- ABA: MOTOR DE ANÁLISE, IHG & ROI -->
+      <div id="tab-analise" class="tab-content card" style="display: none;">
         <h3 class="brand-title">motor de análise e inteligência automática</h3>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">cruzamento de dados do diagnóstico inicial com as auditorias.</p>
         <div class="dashboard-grid" style="margin-top: 1rem;">
-          <div class="metric-card"><h4>índice de hospitalidade (ihg)</h4><div class="value">91.4%</div></div>
+          <div class="metric-card"><h4>índice de hospitalidade geral (ihg)</h4><div class="value">91.4%</div></div>
           <div class="metric-card"><h4>vendas consultivas</h4><div class="value">20% ➔ 65%</div></div>
-          <div class="metric-card"><h4>roi estimado</h4><div class="value">+r$ 14.200/mês</div></div>
+          <div class="metric-card"><h4>roi estimado no faturamento</h4><div class="value">+r$ 14.200/mês</div></div>
         </div>
       </div>
 
-      <!-- ABA RELATÓRIOS -->
-      <div id="tab-relatorios" class="tab-content card hidden">
+      <!-- ABA: RELATÓRIOS & RANKING -->
+      <div id="tab-relatorios" class="tab-content card" style="display: none;">
         <h3 class="brand-title">painel de controle & relatórios executivos</h3>
-        <button class="btn" style="width: auto; margin-top: 1rem; padding: 0.6rem 1.2rem;" onclick="alert('gerando pdf...')">📄 gerar relatório em pdf (1 clique)</button>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">mapa visual de clientes e exportação em 1 clique.</p>
+        <button class="btn" style="width: auto; margin-top: 0.5rem; padding: 0.6rem 1.2rem;" onclick="alert('gerando relatório em pdf...')">gerar relatório em pdf (1 clique)</button>
       </div>
 
     </div>
   </div>
 
   <script>
-    function enterAs(role) {
+    function openProfile(role) {
       const usernameInput = document.getElementById('username').value;
-      const username = usernameInput ? usernameInput : role;
+      const name = usernameInput ? usernameInput : role;
 
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('appHeader').classList.remove('hidden');
+      // Oculta login e exibe topo
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('appHeader').style.display = 'flex';
+
+      // Oculta painéis
+      document.getElementById('studentPanel').style.display = 'none';
+      document.getElementById('dashboardPanel').style.display = 'none';
 
       if (role === 'student') {
-        document.getElementById('studentPanel').classList.remove('hidden');
-        document.getElementById('dashboardPanel').classList.add('hidden');
-        document.getElementById('userInfo').innerText = `aluno: ${username}`;
-      } else if (role === 'client') {
-        document.getElementById('studentPanel').classList.add('hidden');
-        document.getElementById('dashboardPanel').classList.remove('hidden');
-        document.getElementById('userInfo').innerText = `cliente: ${username}`;
+        document.getElementById('studentPanel').style.display = 'block';
+        document.getElementById('userInfo').innerText = 'aluno: ' + name;
+      } 
+      else if (role === 'client') {
+        document.getElementById('dashboardPanel').style.display = 'block';
+        document.getElementById('userInfo').innerText = 'cliente: ' + name;
 
+        // Cliente vê apenas o motor de análise / ROI
         document.getElementById('btn-empresas').style.display = 'none';
         document.getElementById('btn-choque').style.display = 'none';
         document.getElementById('btn-auditoria').style.display = 'none';
-        switchTab('tab-analise');
-      } else {
-        document.getElementById('studentPanel').classList.add('hidden');
-        document.getElementById('dashboardPanel').classList.remove('hidden');
-        document.getElementById('userInfo').innerText = `gestor: ${username}`;
+        showTab('tab-analise', document.getElementById('btn-analise'));
+      } 
+      else {
+        document.getElementById('dashboardPanel').style.display = 'block';
+        document.getElementById('userInfo').innerText = 'gestor: ' + name;
 
+        // Gestor vê todas as abas
         document.getElementById('btn-empresas').style.display = 'inline-block';
         document.getElementById('btn-choque').style.display = 'inline-block';
         document.getElementById('btn-auditoria').style.display = 'inline-block';
-        switchTab('tab-empresas');
+        showTab('tab-empresas', document.getElementById('btn-empresas'));
       }
     }
 
     function logout() {
-      document.getElementById('loginScreen').classList.remove('hidden');
-      document.getElementById('appHeader').classList.add('hidden');
-      document.getElementById('studentPanel').classList.add('hidden');
-      document.getElementById('dashboardPanel').classList.add('hidden');
+      document.getElementById('loginScreen').style.display = 'block';
+      document.getElementById('appHeader').style.display = 'none';
+      document.getElementById('studentPanel').style.display = 'none';
+      document.getElementById('dashboardPanel').style.display = 'none';
     }
 
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-      
+    function showTab(tabId, btnElement) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.style.display = 'none');
+
+      const btns = document.querySelectorAll('.tab-btn');
+      btns.forEach(b => b.classList.remove('active'));
+
       const targetTab = document.getElementById(tabId);
-      if(targetTab) targetTab.classList.remove('hidden');
-      
-      const targetBtn = document.getElementById(tabId.replace('tab-', 'btn-'));
-      if(targetBtn) targetBtn.classList.add('active');
+      if(targetTab) targetTab.style.display = 'block';
+      if(btnElement) btnElement.classList.add('active');
     }
 
     function addCompany() {
@@ -320,4 +338,15 @@
       const ticket = document.getElementById('compTicket').value;
       if(!name) { alert('por favor, informe o nome da empresa.'); return; }
       
-      const tbody = document.getElementById('
+      const tbody = document.getElementById('companyTableBody');
+      const row = document.createElement('tr');
+      row.innerHTML = '<td>' + name + '</td><td>r$ ' + (ticket || '0,00') + '</td><td>cadastrada</td>';
+      tbody.appendChild(row);
+      
+      document.getElementById('compName').value = '';
+      document.getElementById('compTicket').value = '';
+      alert('empresa cadastrada com sucesso!');
+    }
+  </script>
+</body>
+</html>
