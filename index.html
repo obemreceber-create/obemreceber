@@ -79,6 +79,28 @@
       color: var(--texto);
     }
 
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 0.5rem;
+      background: var(--aveia);
+      border-radius: 8px;
+      border: 1px solid var(--bege);
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--texto);
+      cursor: pointer;
+    }
+    .checkbox-item input { width: auto; margin-top: 0.2rem; }
+
     .btn {
       width: 100%;
       padding: 0.85rem;
@@ -120,7 +142,7 @@
 
     .btn-role:hover { background: var(--caramelo); color: white; border-color: var(--caramelo); }
 
-    /* LAYOUT DO GESTOR COM BARRA LATERAL */
+    /* LAYOUT DO GESTOR COM BARRA LATERAL VERTICAL */
     .manager-layout {
       display: grid;
       grid-template-columns: 280px 1fr;
@@ -153,9 +175,40 @@
       color: var(--marrom);
     }
 
-    .content-area { background: var(--card-bg); border: 1px solid var(--bege); border-radius: 12px; padding: 2rem; min-height: 500px; }
+    /* SUB-ABAS HORIZONTAIS DENTRO DO CADASTRO DE EMPRESA */
+    .horizontal-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--bege);
+      padding-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .h-tab-btn {
+      background: var(--aveia);
+      border: 1px solid var(--bege);
+      padding: 0.5rem 0.9rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--marrom);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .h-tab-btn.active {
+      background: var(--marrom);
+      color: var(--bege);
+      border-color: var(--marrom);
+    }
+
+    .content-area { background: var(--card-bg); border: 1px solid var(--bege); border-radius: 12px; padding: 2rem; min-height: 550px; }
     .form-section { display: none; }
     .form-section.active { display: block; }
+    
+    .h-section { display: none; }
+    .h-section.active { display: block; }
 
     .section-title { font-size: 1.2rem; color: var(--marrom); margin-bottom: 0.5rem; font-family: 'Georgia', serif; }
     .section-desc { font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem; }
@@ -205,17 +258,17 @@
       <div class="quick-box">
         <p class="quick-title">escolha o perfil para entrar diretamente:</p>
         <div class="quick-btns">
-          <button type="button" class="btn-role" onclick="openProfile('student')">aluno</button>
+          <button type="button" class="btn-role" onclick="openProfile('student')">colaborador</button>
           <button type="button" class="btn-role" onclick="openProfile('client')">cliente</button>
           <button type="button" class="btn-role" onclick="openProfile('manager')">gestor</button>
         </div>
       </div>
     </div>
 
-    <!-- PAINEL DO ALUNO -->
+    <!-- PAINEL DO COLABORADOR -->
     <div id="studentPanel" style="display: none; width: 100%;">
       <div class="card">
-        <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">módulo I & II: o método do bem receber</h2>
+        <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">trilha de capacitação do colaborador</h2>
         <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem;">etiqueta, postura, comunicação assertiva e conduta em itacaré</p>
         
         <div style="margin-bottom: 1rem; background: var(--aveia); padding: 1rem; border-radius: 8px;">
@@ -225,7 +278,7 @@
       </div>
     </div>
 
-    <!-- PAINEL DO CLIENTE (DADOS GRÁFICOS, RESULTADOS E ROI) -->
+    <!-- PAINEL DO CLIENTE -->
     <div id="clientPanel" style="display: none; width: 100%;">
       <div class="card">
         <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">painel de resultados & desempenho</h2>
@@ -236,11 +289,6 @@
           <div class="metric-card"><h4>evolução de vendas consultivas</h4><div class="value">25% ➔ 70%</div></div>
           <div class="metric-card"><h4>roi estimado no faturamento</h4><div class="value">+r$ 16.500/mês</div></div>
         </div>
-
-        <div style="background: var(--aveia); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
-          <h4 style="color: var(--marrom); margin-bottom: 0.5rem;">📊 resumo das avaliações recentes</h4>
-          <p style="font-size: 0.9rem; color: var(--texto);">sua equipe demonstrou excelente retenção nas auditorias de 30 dias após o treinamento de choque. o acolhimento presencial atingiu nota máxima de excelência.</p>
-        </div>
       </div>
     </div>
 
@@ -248,20 +296,13 @@
     <div id="dashboardPanel" style="display: none; width: 100%;">
       <div class="manager-layout">
         
-        <!-- BARRA LATERAL (SEM NUMERAÇÃO) -->
-        <div class="sidebar" id="gestorSidebar">
-          <h3>cadastro de empresa</h3>
+        <!-- BARRA LATERAL VERTICAL (SEM ORDEM NUMÉRICA) -->
+        <div class="sidebar">
+          <h3>consultoria</h3>
           <ul class="sub-menu">
-            <li class="active" onclick="showSubSection('sec-dados', this)">dados institucionais</li>
-            <li onclick="showSubSection('sec-operacao', this)">operação & atendimento</li>
-            <li onclick="showSubSection('sec-pessoas', this)">gestão de pessoas</li>
-            <li onclick="showSubSection('sec-comercial', this)">dados comerciais & faturamento</li>
-            <li onclick="showSubSection('sec-gargalos', this)">principais gargalos</li>
-          </ul>
-
-          <h3>inteligência da consultoria</h3>
-          <ul class="sub-menu">
-            <li onclick="showSubSection('sec-plano-treinamento', this)">🎯 plano de treinamento prático</li>
+            <li class="active" onclick="showSubSection('sec-cadastro', this)">cadastro de empresa</li>
+            <li onclick="showSubSection('sec-equipe-gestao', this)">gestão de equipe (rh)</li>
+            <li onclick="showSubSection('sec-plano-treinamento', this)">🎯 plano de treinamento ia</li>
             <li onclick="showSubSection('sec-analise', this)">📊 motor de análise, ihg & roi</li>
             <li onclick="showSubSection('sec-relatorios', this)">📄 relatórios & ranking</li>
           </ul>
@@ -270,85 +311,130 @@
         <!-- ÁREA DE CONTEÚDO DINÂMICO -->
         <div class="content-area">
           
-          <!-- Subcategoria 1: Dados Institucionais (Razão Social e CNPJ separados) -->
-          <div id="sec-dados" class="form-section active">
-            <h2 class="section-title">dados cadastrais e institucionais</h2>
-            <p class="section-desc">identificação, razão social, cnpj e contatos principais do estabelecimento.</p>
+          <!-- SEÇÃO: CADASTRO DE EMPRESA (COM SUB-ABAS HORIZONTAIS) -->
+          <div id="sec-cadastro" class="form-section active">
             
-            <div class="form-group">
-              <label>razão social</label>
-              <input type="text" placeholder="ex: pousada mares de itacaré ltda">
+            <!-- ABAS HORIZONTAIS DE CADASTRO -->
+            <div class="horizontal-tabs">
+              <button class="h-tab-btn active" onclick="showHorizontalTab('h-empresa', this)">empresa</button>
+              <button class="h-tab-btn" onclick="showHorizontalTab('h-dados', this)">dados cadastrais</button>
+              <button class="h-tab-btn" onclick="showHorizontalTab('h-gargalos', this)">gargalos</button>
+              <button class="h-tab-btn" onclick="showHorizontalTab('h-operacao', this)">operação (colaboradores)</button>
             </div>
 
-            <div class="form-group">
-              <label>cnpj</label>
-              <input type="text" placeholder="ex: 00.000.000/0001-00">
+            <!-- Sub-aba 1: Empresa -->
+            <div id="h-empresa" class="h-section active">
+              <h2 class="section-title">tipo de estabelecimento</h2>
+              <p class="section-desc">selecione o segmento da empresa atendida.</p>
+              <div class="form-group">
+                <label>segmento comercial</label>
+                <select id="tipoEmpresa">
+                  <option value="loja">loja</option>
+                  <option value="bar">bar</option>
+                  <option value="restaurante">restaurante</option>
+                  <option value="hotelaria">hotelaria</option>
+                </select>
+              </div>
+              <button class="btn" style="width: auto;" onclick="alert('segmento salvo!')">salvar segmento</button>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-              <div class="form-group"><label>telefone / whatsapp</label><input type="text" placeholder="(73) 99999-9999"></div>
-              <div class="form-group"><label>e-mail de contato</label><input type="text" placeholder="contato@pousada.com"></div>
+            <!-- Sub-aba 2: Dados Cadastrais -->
+            <div id="h-dados" class="h-section">
+              <h2 class="section-title">dados cadastrais</h2>
+              <p class="section-desc">informações jurídicas e financeiras básicas.</p>
+              <div class="form-group"><label>razão social</label><input type="text" id="razaoSocial" placeholder="ex: pousada mares de itacaré ltda"></div>
+              <div class="form-group"><label>cnpj</label><input type="text" id="cnpj" placeholder="ex: 00.000.000/0001-00"></div>
+              <div class="form-group"><label>telefone / whatsapp</label><input type="text" id="telefone" placeholder="(73) 99999-9999"></div>
+              <div class="form-group"><label>responsável</label><input type="text" id="responsavel" placeholder="nome do gestor ou dono"></div>
+              <div class="form-group"><label>ticket médio / diária média</label><input type="text" id="ticketMedio" placeholder="ex: r$ 180,00"></div>
+              <div class="form-group"><label>ocupação semanal</label><input type="text" id="ocupacao" placeholder="ex: 75% de ocupação média"></div>
+              <button class="btn" style="width: auto;" onclick="alert('dados cadastrais salvos!')">salvar dados cadastrais</button>
             </div>
-            
-            <div class="form-group"><label>responsável / gestor principal</label><input type="text" placeholder="nome do gerente ou dono"></div>
-            <button class="btn" style="width: auto;" onclick="alert('dados institucionais salvos!')">salvar dados institucionais</button>
+
+            <!-- Sub-aba 3: Gargalos -->
+            <div id="h-gargalos" class="h-section">
+              <h2 class="section-title">gargalos & objetivos</h2>
+              <p class="section-desc">principais reclamações e meta da consultoria.</p>
+              <div class="form-group"><label>principais reclamações dos hóspedes / clientes</label><textarea rows="3" placeholder="ex: demora na entrega de pratos, falta de cortesia na recepção..."></textarea></div>
+              <div class="form-group"><label>qual o objetivo principal do projeto?</label><textarea rows="3" placeholder="ex: padronizar o atendimento para abrir uma filial, aumentar vendas..."></textarea></div>
+              <button class="btn" style="width: auto;" onclick="alert('gargalos salvos!')">salvar gargalos</button>
+            </div>
+
+            <!-- Sub-aba 4: Operação (Cadastro de Colaboradores) -->
+            <div id="h-operacao" class="h-section">
+              <h2 class="section-title">operação: cadastro de colaborador</h2>
+              <p class="section-desc">registe os colaboradores e analise perfis de atendimento.</p>
+              
+              <div class="form-group"><label>nome completo</label><input type="text" id="colabNome" placeholder="nome completo"></div>
+              <div class="form-group"><label>nome social</label><input type="text" id="colabSocial" placeholder="nome social (opcional)"></div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group"><label>idade</label><input type="number" id="colabIdade" placeholder="ex: 28"></div>
+                <div class="form-group"><label>tempo trabalhando com atendimento</label><input type="text" id="colabTempo" placeholder="ex: 3 anos"></div>
+              </div>
+              <div class="form-group">
+                <label>identidade de gênero</label>
+                <select id="colabGenero">
+                  <option value="masculino">masculino</option>
+                  <option value="feminino">feminino</option>
+                  <option value="outro">outro</option>
+                </select>
+              </div>
+
+              <!-- Pontos Positivos (Escolher até 2) -->
+              <div class="form-group">
+                <label>escolha seus pontos positivos no trabalho (selecione até 2):</label>
+                <div class="checkbox-group" id="posGroup">
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="saber ouvir de verdade"> saber ouvir de verdade: presta atenção na pessoa sem interromper e foca no que ela realmente precisa.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="empatia e acolhimento"> empatia e acolhimento: se coloca no lugar do outro e atende com simpatia e postura aberta.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="papo reto e claro"> papo reto e claro: explica tudo de um jeito simples, sem termos técnicos ou complicados.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="atitude e iniciativa"> atitude e iniciativa: não espera o hóspede pedir; se antecipa e oferece ajuda logo de cara.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="jogo de cintura"> jogo de cintura: mantém a calma e a educação, mesmo em situações de estresse ou reclamações.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="postura e presença"> postura e presença: passa confiança na imagem e mostra que está pronto para servir.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="agilidade na solução"> agilidade na solução: resolve o problema de forma rápida, eficiente e sem enrolação.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="pos" value="entender do assunto"> entender do assunto: domina as regras da casa e os serviços oferecidos, respondendo com segurança.</label>
+                </div>
+              </div>
+
+              <!-- Pontos a Melhorar (Escolher até 2) -->
+              <div class="form-group">
+                <label>quais seus pontos a melhorar? (selecione até 2):</label>
+                <div class="checkbox-group" id="melhorarGroup">
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="falta de atenção"> falta de atenção: corta a fala de quem está conversando ou parece desligado.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="frieza no contato"> frieza no contato: atende de forma muito mecânica, sem demonstrar empatia.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="comunicação complicada"> comunicação complicada: usa termos internos ou técnicos confusos.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="falta de iniciativa"> falta de iniciativa: limita-se a dizer "não sei", sem tentar buscar alternativa.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="reatividade ao estresse"> reatividade ao estresse: perde a paciência ou fica na defensiva.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="postura desatenta"> postura desatenta: demonstra desinteresse com braços cruzados ou celular.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="lentidão no processo"> lentidão no processo: demora para executar tarefas simples.</label>
+                  <label class="checkbox-item"><input type="checkbox" name="melhorar" value="insegurança nas respostas"> insegurança nas respostas: demonstra desconhecimento sobre as regras.</label>
+                </div>
+              </div>
+
+              <button class="btn" onclick="salvarColaborador()">finalizar cadastro do colaborador</button>
+            </div>
+
           </div>
 
-          <!-- Subcategoria 2: Operação e Atendimento -->
-          <div id="sec-operacao" class="form-section">
-            <h2 class="section-title">dados de operação e atendimento (jornada do cliente)</h2>
-            <p class="section-desc">tma, avaliações externas (tripadvisor/google), pops e volume de atendimento.</p>
-            <div class="form-group"><label>tempo médio de atendimento (tma)</label><input type="text" placeholder="ex: tempo de check-in ou entrega de prato"></div>
-            <div class="form-group"><label>avaliações e pesquisas de satisfação (notas atuais)</label><input type="text" placeholder="ex: nota 4.2 no google / booking 8.9"></div>
-            <div class="form-group"><label>manuais de processos (pops existentes)</label><textarea rows="2" placeholder="descreva se há pops na recepção, salão ou governança..."></textarea></div>
-            <div class="form-group"><label>volume de atendimentos / horários de pico</label><input type="text" placeholder="ex: ocupação máxima nos fins de semana das 19h às 22h"></div>
-            <button class="btn" style="width: auto;" onclick="alert('dados operacionais salvos!')">salvar dados operacionais</button>
+          <!-- SEÇÃO: GESTÃO DE EQUIPE (RH) -->
+          <div id="sec-equipe-gestao" class="form-section">
+            <h2 class="section-title">gestão de equipe & rh</h2>
+            <p class="section-desc">adicione organograma, escala, turno, remuneração e benefícios para cada colaborador.</p>
+            <div class="form-group"><label>selecionar colaborador</label><select id="selectColab"><option>nenhum colaborador cadastrado ainda</option></select></div>
+            <div class="form-group"><label>organograma / cargo / setor</label><input type="text" placeholder="ex: recepcionista / front desk"></div>
+            <div class="form-group"><label>escala e turnos</label><input type="text" placeholder="ex: 6x1 - turno manhã (07h às 15h)"></div>
+            <div class="form-group"><label>remuneração e benefícios</label><input type="text" placeholder="ex: salário base + divisão de taxa de serviço (10%) + vale transporte"></div>
+            <button class="btn" style="width: auto;" onclick="alert('dados de RH atualizados para o colaborador!')">salvar dados de rh</button>
           </div>
 
-          <!-- Subcategoria 3: Gestão de Pessoas -->
-          <div id="sec-pessoas" class="form-section">
-            <h2 class="section-title">dados de gestão de pessoas (equipe)</h2>
-            <p class="section-desc">organograma, escalas, taxa de rotatividade (turnover) e remuneração/gorjetas.</p>
-            <div class="form-group"><label>organograma e escalas de turnos</label><input type="text" placeholder="ex: 4 garçons, 2 recepcionistas, folgas às terças"></div>
-            <div class="form-group"><label>taxa de rotatividade (turnover)</label><input type="text" placeholder="ex: alta rotatividade de cumins nos últimos 6 meses"></div>
-            <div class="form-group"><label>modelo de remuneração (taxa de serviço / 10%)</label><input type="text" placeholder="ex: divisão integral de 10% repassada à equipa + metas"></div>
-            <button class="btn" style="width: auto;" onclick="alert('dados de RH salvos!')">salvar dados de pessoas</button>
-          </div>
-
-          <!-- Subcategoria 4: Dados Comerciais e de Faturamento -->
-          <div id="sec-comercial" class="form-section">
-            <h2 class="section-title">dados comerciais e de faturamento</h2>
-            <p class="section-desc">ticket médio, curva abc de produtos e stack de tecnologias utilizadas.</p>
-            <div class="form-group"><label>ticket médio / diária média (adr ou revpar)</label><input type="text" placeholder="ex: ticket médio de r$ 180 por mesa"></div>
-            <div class="form-group"><label>curva abc de produtos (mais vendidos)</label><input type="text" placeholder="ex: peixe ao molho de cacau, drinks tropicais"></div>
-            <div class="form-group"><label>sistemas utilizados (tech stack - pms / pos)</label><input type="text" placeholder="ex: sistema consumer / touch / cardápio digital"></div>
-            <button class="btn" style="width: auto;" onclick="alert('dados comerciais salvos!')">salvar dados comerciais</button>
-          </div>
-
-          <!-- Subcategoria 5: Principais Gargalos -->
-          <div id="sec-gargalos" class="form-section">
-            <h2 class="section-title">principais gargalos (o que precisa melhorar?)</h2>
-            <p class="section-desc">reclamações recorrentes e motivação principal do projeto de consultoria.</p>
-            <div class="form-group"><label>reclamações recorrentes</label><textarea rows="2" placeholder="ex: demora na entrega de pratos nos horários de pico, falta de cortesia..."></textarea></div>
-            <div class="form-group"><label>motivação do projeto / objetivo principal</label><textarea rows="2" placeholder="ex: padronizar o atendimento para abrir filial ou aumentar vendas de sobremesas..."></textarea></div>
-            <button class="btn" style="width: auto;" onclick="alert('gargalos salvos com sucesso!')">salvar gargalos</button>
-          </div>
-
-          <!-- PLANO DE TREINAMENTO PRÁTICO -->
+          <!-- PLANO DE TREINAMENTO PRÁTICO (IA) -->
           <div id="sec-plano-treinamento" class="form-section">
-            <h2 class="section-title">🎯 plano de treinamento de atendimento</h2>
-            <p class="section-desc">diretrizes práticas geradas com base nos dados e gargalos mapeados para aplicar com a equipe.</p>
+            <h2 class="section-title">🎯 plano de treinamento prático (análise de ia)</h2>
+            <p class="section-desc">planos personalizados gerados automaticamente com base nas respostas dos colaboradores.</p>
             
             <div style="background: var(--aveia); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--caramelo);">
-              <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">foco 1: correção de gargalos de tempo (tma)</h4>
-              <p style="font-size: 0.85rem; color: var(--texto);">como a pesquisa indicou demora nos horários de pico, o treinamento de etiqueta exigirá a técnica de <em>gestão de expectativas</em>: o colaborador deve avisar o cliente sobre o tempo de preparo com simpatia nos primeiros 2 minutos.</p>
+              <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">diagnóstico tático automatizado</h4>
+              <p style="font-size: 0.85rem; color: var(--texto);">com base nos pontos a melhorar assinalados nos cadastros, a inteligência artificial gerou micro-treinamentos de choque focados em eliminar a frieza no contato e a insegurança nas respostas da equipa.</p>
             </div>
-
-            <div style="background: var(--aveia); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--verde-musgo);">
-              <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">foco 2: venda consultiva (curva abc)</h4>
-              <p style="font-size: 0.85rem; color: var(--texto);">treinar a equipa de salão/recepção a destacar ativamente os produtos da curva abc de maior margem (ex: drinks tropicais e pratos regionais de cacau) usando o "sorriso no olhar" e escuta ativa.</p>
-            </div>
-            
             <button class="btn" style="width: auto;" onclick="alert('plano de treinamento exportado para PDF!')">📄 gerar plano de treinamento em pdf</button>
           </div>
 
@@ -378,6 +464,8 @@
   </div>
 
   <script>
+    let colaboradoresLista = [];
+
     function openProfile(role) {
       const usernameInput = document.getElementById('username').value;
       const name = usernameInput ? usernameInput : role;
@@ -385,20 +473,17 @@
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('appHeader').style.display = 'flex';
       
-      // Esconde todos os painéis inicialmente
       document.getElementById('studentPanel').style.display = 'none';
       document.getElementById('clientPanel').style.display = 'none';
       document.getElementById('dashboardPanel').style.display = 'none';
 
       if (role === 'student') {
         document.getElementById('studentPanel').style.display = 'block';
-        document.getElementById('userInfo').innerText = 'aluno: ' + name;
+        document.getElementById('userInfo').innerText = 'colaborador: ' + name;
       } else if (role === 'client') {
-        // Painel exclusivo do cliente (apenas gráficos, resultados e ROI)
         document.getElementById('clientPanel').style.display = 'block';
         document.getElementById('userInfo').innerText = 'cliente: ' + name;
       } else {
-        // Painel completo do gestor
         document.getElementById('dashboardPanel').style.display = 'block';
         document.getElementById('userInfo').innerText = 'gestor: ' + name;
       }
@@ -414,13 +499,49 @@
 
     function showSubSection(sectionId, menuElement) {
       const sections = document.querySelectorAll('.form-section');
-      sections.forEach(sec => sec.classList.not ? sec.classList.remove('active') : sec.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
 
       const menuItems = document.querySelectorAll('.sub-menu li');
       menuItems.forEach(item => item.classList.remove('active'));
 
       document.getElementById(sectionId).classList.add('active');
       if(menuElement) menuElement.classList.add('active');
+    }
+
+    function showHorizontalTab(tabId, btnElement) {
+      const sections = document.querySelectorAll('.h-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      const btns = document.querySelectorAll('.h-tab-btn');
+      btns.forEach(b => b.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      if(btnElement) btnElement.classList.add('active');
+    }
+
+    function salvarColaborador() {
+      const nome = document.getElementById('colabNome').value;
+      if(!nome) { alert('por favor, preencha o nome completo do colaborador.'); return; }
+      
+      colaboradoresLista.push(nome);
+      
+      // Atualiza o select da gestão de RH
+      const select = document.getElementById('selectColab');
+      select.innerHTML = '';
+      colaboradoresLista.forEach(c => {
+        let opt = document.createElement('option');
+        opt.value = c;
+        opt.text = c;
+        select.appendChild(opt);
+      });
+
+      alert('colaborador cadastrado com sucesso! os dados foram integrados para a análise da ia.');
+      
+      // Limpa campos
+      document.getElementById('colabNome').value = '';
+      document.getElementById('colabSocial').value = '';
+      document.getElementById('colabIdade').value = '';
+      document.getElementById('colabTempo').value = '';
     }
   </script>
 </body>
