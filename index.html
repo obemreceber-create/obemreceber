@@ -3,62 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O Bem Receber - Plataforma de Consultoria & IA</title>
+  <title>o bem receber | consultoria & treinamento</title>
   <style>
     :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --accent: #f59e0b;
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --accent: #10b981;
       --bg: #f8fafc;
-      --text: #0f172a;
+      --text: #334155;
       --card-bg: #ffffff;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; text-transform: lowercase; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
 
     header {
-      background: linear-gradient(135deg, #0284c7, #0f766e);
+      background: linear-gradient(135deg, #0ea5e9, #0d9488);
       color: white;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 100%;
-      padding-left: 2rem;
-      padding-right: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
 
-    header h1 { font-size: 1.8rem; }
-    .user-info { font-size: 0.9rem; background: rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 20px; }
+    header h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.5px; }
+    .user-info { font-size: 0.85rem; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; }
 
-    .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+    .container { max-width: 900px; margin: auto; padding: 2rem 1rem; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* TELA DE LOGIN */
-    .login-container {
-      max-width: 400px;
-      margin: 4rem auto;
-      background: white;
-      padding: 2.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border: 1px solid #e2e8f0;
-    }
-
-    .login-container h2 { text-align: center; margin-bottom: 1.5rem; color: var(--primary-dark); }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.9rem; }
-    .form-group input, .form-group select { width: 100%; padding: 0.7rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; }
-
-    .card {
+    /* TELA DE LOGIN LEVE E DESCONTRAÍDA */
+    .login-box {
+      width: 100%;
+      max-width: 380px;
       background: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
+      border: 1px solid #f1f5f9;
+    }
+
+    .login-box h2 { text-align: center; margin-bottom: 0.4rem; color: #0f172a; font-size: 1.6rem; }
+    .login-box p { text-align: center; font-size: 0.85rem; color: #64748b; margin-bottom: 2rem; }
+
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 500; font-size: 0.85rem; color: #475569; }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
       border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
     }
 
     .btn {
@@ -67,58 +71,74 @@
       background: var(--primary);
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
     }
 
     .btn:hover { background: var(--primary-dark); }
-    .btn-secondary { background: #64748b; width: auto; padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+    .btn:active { transform: scale(0.98); }
+    .btn-secondary { background: #94a3b8; width: auto; padding: 0.3rem 0.7rem; font-size: 0.8rem; margin-top: 0; }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+      border: 1px solid #f1f5f9;
+      width: 100%;
+    }
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .metric-card {
       background: #f0f9ff;
       border-left: 4px solid var(--primary);
       padding: 1.2rem;
-      border-radius: 8px;
+      border-radius: 12px;
     }
 
-    .metric-card h4 { color: #0369a1; font-size: 0.85rem; text-transform: uppercase; }
-    .metric-card .value { font-size: 1.8rem; font-weight: bold; margin-top: 0.4rem; }
+    .metric-card h4 { color: #0369a1; font-size: 0.8rem; font-weight: 600; }
+    .metric-card .value { font-size: 1.6rem; font-weight: 700; color: #0f172a; margin-top: 0.3rem; }
 
     .ai-box {
       background: #fffbeb;
       border: 1px solid #fef3c7;
-      border-left: 5px solid var(--accent);
-      padding: 1.5rem;
-      border-radius: 8px;
+      border-left: 4px solid #f59e0b;
+      padding: 1.2rem;
+      border-radius: 12px;
     }
 
     .tech-box {
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
-      border-left: 5px solid #16a34a;
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin-top: 1.5rem;
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem;
+      border-radius: 12px;
+      margin-top: 1rem;
     }
 
     .quiz-option {
       display: block;
-      margin: 0.8rem 0;
-      padding: 0.8rem;
+      margin: 0.6rem 0;
+      padding: 0.8rem 1rem;
       border: 1px solid #e2e8f0;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
+      background: #f8fafc;
+      font-size: 0.9rem;
+      transition: background 0.2s;
     }
+    .quiz-option:hover { background: #f1f5f9; }
 
     .hidden { display: none !important; }
   </style>
@@ -127,110 +147,103 @@
 
   <!-- CABEÇALHO -->
   <header id="appHeader" class="hidden">
-    <h1>O BEM RECEBER</h1>
+    <h1>o bem receber</h1>
     <div style="display: flex; align-items: center; gap: 1rem;">
-      <span class="user-info" id="userInfo">Usuário: -</span>
-      <button class="btn btn-secondary" onclick="logout()">Sair</button>
+      <span class="user-info" id="userInfo">usuário: -</span>
+      <button class="btn btn-secondary" onclick="logout()">sair</button>
     </div>
   </header>
 
-  <!-- TELA DE LOGIN -->
-  <div id="loginScreen" class="container">
-    <div class="login-container">
-      <h2>O BEM RECEBER</h2>
-      <p style="text-align: center; font-size: 0.85rem; color: #64748b; margin-bottom: 1.5rem;">Plataforma de Treinamento & Consultoria</p>
+  <div class="container">
+    <!-- TELA DE LOGIN SIMPLIFICADA E LEVE -->
+    <div id="loginScreen" class="login-box">
+      <h2>o bem receber</h2>
+      <p>plataforma de treinamento & consultoria</p>
 
       <div class="form-group">
-        <label for="username">Usuário / E-mail</label>
-        <input type="text" id="username" placeholder="Seu usuário">
+        <label for="username">usuário ou e-mail</label>
+        <input type="text" id="username" placeholder="digite seu usuário">
       </div>
 
       <div class="form-group">
-        <label for="userRole">Perfil de Acesso</label>
+        <label for="password">senha de acesso</label>
+        <input type="password" id="password" placeholder="••••••••">
+      </div>
+
+      <div class="form-group">
+        <label for="userRole">perfil de simulação</label>
         <select id="userRole">
-          <option value="student">Aluno / Colaborador</option>
-          <option value="manager">Gestor do Estabelecimento</option>
-          <option value="consultant">Consultoria O Bem Receber (Admin)</option>
+          <option value="student">aluno / colaborador</option>
+          <option value="manager">gestor (estabelecimento)</option>
+          <option value="consultant">consultoria admin (geral)</option>
         </select>
       </div>
 
-      <div class="form-group">
-        <label for="userCompany">Empresa</label>
-        <select id="userCompany">
-          <option value="Pousada Mares de Itacaré">Pousada Mares de Itacaré</option>
-          <option value="Restaurante Mirante">Restaurante Mirante das Ondas</option>
-        </select>
+      <button class="btn" onclick="login()">entrar no sistema</button>
+    </div>
+
+    <!-- PAINEL DO ALUNO -->
+    <div id="studentPanel" class="hidden" style="width: 100%;">
+      <div class="card">
+        <h2>🎓 módulo 1: hospitalidade & encantamento em itacaré</h2>
+        <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 1.2rem;">trilha de capacitação profissional</p>
+        
+        <article style="font-size: 0.95rem; color: #475569;">
+          <p>a experiência do cliente começa na primeira interação. receba cada visitante com cordialidade genuína, empatia e conhecimento prático sobre as praias, marés e gastronomia local de itacaré.</p>
+        </article>
       </div>
 
-      <button class="btn" onclick="login()">Entrar no Sistema</button>
-    </div>
-  </div>
-
-  <!-- PAINEL DO ALUNO -->
-  <div id="studentPanel" class="container hidden">
-    <div class="card">
-      <h2>🎓 Módulo 1: Hospitalidade & Encantamento em Itacaré</h2>
-      <p style="color: #64748b; margin-bottom: 1rem;">Empresa: <strong class="companyLabel"></strong></p>
-      
-      <article style="line-height: 1.8;">
-        <h3>1. Acolhimento & Postura Profissional</h3>
-        <p>A experiência do cliente começa na primeira interação. Receba cada visitante com cordialidade, empatia e conhecimento prático da cidade (marés, passeios e gastronomia local).</p>
-      </article>
-    </div>
-
-    <div class="card">
-      <h3>⚡ Quiz de Fixação</h3>
-      <div style="margin-top: 1rem;">
-        <p><strong>Como agir ao receber um cliente estrangeiro com dúvida sobre os passeios da região?</strong></p>
-        <label class="quiz-option"><input type="radio" name="q1" value="0"> Pedir para ele procurar informações na internet.</label>
-        <label class="quiz-option"><input type="radio" name="q1" value="1"> Atender com paciência, usar frases simples em inglês e explicar os principais pontos turísticos de Itacaré.</label>
+      <div class="card">
+        <h3>⚡ quiz de fixação</h3>
+        <div style="margin-top: 1rem;">
+          <p style="font-size: 0.95rem; font-weight: 500;">como agir ao receber um cliente com dúvidas sobre os passeios da região?</p>
+          <label class="quiz-option"><input type="radio" name="q1" value="0"> sugerir que ele procure informações sozinho na internet.</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="1"> atender com paciência, escutar ativamente e orientar sobre os melhores pontos turísticos locais.</label>
+        </div>
+        <button class="btn" style="margin-top: 1.2rem;" onclick="alert('resposta enviada com sucesso!')">enviar resposta</button>
       </div>
-      <button class="btn" style="margin-top: 1rem;" onclick="alert('Resposta enviada com sucesso!')">Enviar Quiz</button>
     </div>
-  </div>
 
-  <!-- PAINEL DO GESTOR & CONSULTORIA -->
-  <div id="managerPanel" class="container hidden">
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <h2>📊 Painel de Desempenho & Inteligência de Dados</h2>
-        <div>
-          <label style="font-weight: 600; font-size: 0.9rem;">Modo de Visualização: </label>
-          <select id="viewMode" onchange="updateDashboardView()" style="padding: 0.5rem; border-radius: 6px;">
-            <option value="single">Visão Individual da Empresa</option>
-            <option value="consolidated">Visão Consolidada Geral (Todas as Empresas)</option>
-          </select>
+    <!-- PAINEL DO GESTOR & CONSULTORIA -->
+    <div id="managerPanel" class="hidden" style="width: 100%;">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <h2>📊 painel de desempenho & dados</h2>
+          <div>
+            <label style="font-weight: 500; font-size: 0.85rem;">visão: </label>
+            <select id="viewMode" onchange="updateDashboardView()" style="padding: 0.4rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+              <option value="single">visão individual da empresa</option>
+              <option value="consolidated">visão consolidada (o bem receber)</option>
+            </select>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- CARDS DE MÉTRICAS -->
-    <div class="dashboard-grid">
-      <div class="metric-card">
-        <h4 id="m1Title">Aproveitamento da Equipe</h4>
-        <div class="value" id="m1Value">89%</div>
-      </div>
-      <div class="metric-card">
-        <h4 id="m2Title">Engajamento nos Quizzes</h4>
-        <div class="value" id="m2Value">94%</div>
-      </div>
-      <div class="metric-card">
-        <h4 id="m3Title">Índice de Hospitalidade</h4>
-        <div class="value" id="m3Value">Nota 9.3</div>
-      </div>
-    </div>
-
-    <!-- DIAGNÓSTICO INTELIGENTE DA IA -->
-    <div class="card">
-      <div class="ai-box">
-        <h3 style="color: #b45309; margin-bottom: 0.5rem;">🤖 Diagnóstico Inteligente de Atendimento</h3>
-        <p id="aiText">Carregando análise dinâmica do estabelecimento...</p>
+      <div class="dashboard-grid">
+        <div class="metric-card">
+          <h4 id="m1Title">aproveitamento da equipe</h4>
+          <div class="value" id="m1Value">89%</div>
+        </div>
+        <div class="metric-card">
+          <h4 id="m2Title">engajamento nos quizzes</h4>
+          <div class="value" id="m2Value">94%</div>
+        </div>
+        <div class="metric-card">
+          <h4 id="m3Title">índice de hospitalidade</h4>
+          <div class="value" id="m3Value">nota 9.3</div>
+        </div>
       </div>
 
-      <!-- RECOMENDAÇÕES TECNOLÓGICAS -->
-      <div class="tech-box">
-        <h3 style="color: #15803d; margin-bottom: 0.5rem;">🚀 Adequação a Novas Tecnologias</h3>
-        <p id="techText">Identificando ferramentas para modernizar o atendimento local...</p>
+      <div class="card">
+        <div class="ai-box">
+          <h3 style="color: #b45309; font-size: 1rem; margin-bottom: 0.4rem;">🤖 diagnóstico inteligente de atendimento</h3>
+          <p id="aiText" style="font-size: 0.9rem; color: #78350f;">carregando análise dinâmica...</p>
+        </div>
+
+        <div class="tech-box">
+          <h3 style="color: #15803d; font-size: 1rem; margin-bottom: 0.4rem;">🚀 adequação a novas tecnologias</h3>
+          <p id="techText" style="font-size: 0.9rem; color: #166534;">identificando ferramentas para modernizar o atendimento...</p>
+        </div>
       </div>
     </div>
   </div>
@@ -239,17 +252,15 @@
     let currentUser = {};
 
     function login() {
-      const username = document.getElementById('username').value || 'Usuário';
+      const username = document.getElementById('username').value || 'colaborador';
       const role = document.getElementById('userRole').value;
-      const company = document.getElementById('userCompany').value;
 
-      currentUser = { username, role, company };
+      currentUser = { username, role };
 
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('appHeader').classList.remove('hidden');
       
       document.getElementById('userInfo').innerText = `${username} (${getRoleName(role)})`;
-      document.querySelectorAll('.companyLabel').forEach(el => el.innerText = company);
 
       if (role === 'student') {
         document.getElementById('studentPanel').classList.remove('hidden');
@@ -270,9 +281,9 @@
     }
 
     function getRoleName(role) {
-      if(role === 'student') return 'Aluno';
-      if(role === 'manager') return 'Gestor';
-      return 'Consultoria O Bem Receber';
+      if(role === 'student') return 'aluno';
+      if(role === 'manager') return 'gestor';
+      return 'consultoria admin';
     }
 
     function updateDashboardView() {
@@ -283,19 +294,19 @@
       if (mode === 'single') {
         document.getElementById('m1Value').innerText = '87%';
         document.getElementById('m2Value').innerText = '91%';
-        document.getElementById('m3Value').innerText = 'Nota 9.1';
+        document.getElementById('m3Value').innerText = 'nota 9.1';
 
-        aiText.innerHTML = `<strong>Análise para ${currentUser.company}:</strong> A equipe apresenta excelente desempenho na recepção presencial, porém foi identificada uma oportunidade de melhoria no tempo de resposta inicial em canais digitais (WhatsApp e Instagram).`;
+        aiText.innerHTML = `<strong>análise da empresa parceira:</strong> equipe demonstra excelente acolhimento presencial, com oportunidades de otimizar o tempo de resposta inicial em canais digitais (whatsapp e instagram).`;
         
-        techText.innerHTML = `<strong>Inovações Sugeridas:</strong> Implementar respostas automáticas inteligentes com IA no WhatsApp Business e disponibilizar cardápios digitais interativos com tradução automática instantânea para clientes estrangeiros.`;
+        techText.innerHTML = `<strong>inovações sugeridas:</strong> adotar respostas automáticas inteligentes para dúvidas frequentes e cardápios digitais interativos com suporte multilíngue para turistas estrangeiros.`;
       } else {
         document.getElementById('m1Value').innerText = '92%';
         document.getElementById('m2Value').innerText = '96%';
-        document.getElementById('m3Value').innerText = 'Nota 9.5';
+        document.getElementById('m3Value').innerText = 'nota 9.5';
 
-        aiText.innerHTML = `<strong>Impacto Geral da Consultoria "O Bem Receber" em Itacaré:</strong> Foram treinados mais de 120 colaboradores em múltiplos estabelecimentos da cidade. O índice médio de satisfação do visitante subiu 18% no último trimestre.`;
+        aiText.innerHTML = `<strong>impacto global da consultoria "o bem receber" em itacaré:</strong> mais de 120 colaboradores capacitados em múltiplos estabelecimentos. o índice médio de satisfação dos visitantes subiu 18% no trimestre.`;
         
-        techText.innerHTML = `<strong>Tecnologias de Escala para Itacaré:</strong> Criação de um QR Code unificado nas recepções das pousadas parceiras para medir a satisfação do turista em tempo real com processamento estatístico via IA.`;
+        techText.innerHTML = `<strong>tecnologias de escala regional:</strong> implementação de qr codes dinâmicos nas recepções para captação de feedback em tempo real e relatórios automatizados de satisfação por IA.`;
       }
     }
   </script>
