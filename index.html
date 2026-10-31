@@ -61,7 +61,7 @@
     /* tela de login descontraída e limpa */
     .login-box {
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       background: var(--card-bg);
       padding: 2.8rem;
       border-radius: 16px;
@@ -111,6 +111,44 @@
     .btn:hover { background: var(--caqui); color: white; }
     .btn-secondary { background: var(--caqui); width: auto; padding: 0.35rem 0.8rem; font-size: 0.8rem; margin-top: 0; }
 
+    .quick-access-box {
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed var(--bege);
+      text-align: center;
+    }
+
+    .quick-access-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--caqui);
+      margin-bottom: 0.8rem;
+    }
+
+    .quick-btn-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-role {
+      flex: 1;
+      padding: 0.6rem 0.4rem;
+      font-size: 0.75rem;
+      background: var(--aveia);
+      color: var(--marrom);
+      border: 1px solid var(--bege);
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-role:hover {
+      background: var(--caramelo);
+      color: white;
+      border-color: var(--caramelo);
+    }
+
     /* navegação horizontal do gestor */
     .nav-tabs {
       display: flex;
@@ -152,92 +190,4 @@
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .metric-card {
-      background: var(--aveia);
-      border-left: 4px solid var(--caramelo);
-      padding: 1.2rem;
-      border-radius: 8px;
-    }
-
-    .metric-card h4 { color: var(--marrom); font-size: 0.8rem; font-weight: 700; }
-    .metric-card .value { font-size: 1.6rem; font-weight: 700; color: var(--marrom); margin-top: 0.3rem; font-family: 'Georgia', serif; }
-
-    .alert-box {
-      background: #fdf8f0;
-      border: 1px solid #fae8d2;
-      border-left: 4px solid var(--caramelo);
-      padding: 1.2rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-
-    .table-container { width: 100%; overflow-x: auto; margin-top: 1rem; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid var(--bege); }
-    th { color: var(--marrom); font-weight: 700; background: var(--aveia); }
-
-    .quiz-option {
-      display: block;
-      margin: 0.6rem 0;
-      padding: 0.8rem 1rem;
-      border: 1px solid var(--bege);
-      border-radius: 8px;
-      cursor: pointer;
-      background: var(--aveia);
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-    .quiz-option:hover { background: #e2d2be; }
-
-    .hidden { display: none !important; }
-  </style>
-</head>
-<body>
-
-  <!-- cabeçalho -->
-  <header id="appHeader" class="hidden">
-    <h1 class="brand-title">o bem receber</h1>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <span class="user-info" id="userInfo">usuário: -</span>
-      <button class="btn btn-secondary" onclick="logout()">sair</button>
-    </div>
-  </header>
-
-  <div class="container" id="mainContainer">
-    
-    <!-- 1 & 2. TELA DE LOGIN -->
-    <div id="loginScreen" class="login-box">
-      <h2 class="brand-title">o bem receber</h2>
-      <p>consultoria e treinamento sobre a arte do bem receber</p>
-
-      <div class="form-group">
-        <label for="username">usuário ou e-mail</label>
-        <input type="text" id="username" placeholder="digite seu usuário">
-      </div>
-
-      <div class="form-group">
-        <label for="password">senha</label>
-        <input type="password" id="password" placeholder="••••••••">
-      </div>
-
-      <div class="form-group">
-        <label for="simulatedRole">perfil de acesso</label>
-        <select id="simulatedRole">
-          <option value="student">aluno / colaborador (método, etiqueta & quizzes)</option>
-          <option value="client">cliente (dono/gestor: apenas gráficos & resultados)</option>
-          <option value="manager">gestor / consultor (painel geral & auditoria)</option>
-        </select>
-      </div>
-
-      <button class="btn" onclick="login()">entrar</button>
-    </div>
-
-    <!-- 3A. PAINEL DO ALUNO / COLABORADOR -->
-    <div id="studentPanel" class="hidden" style="width: 100%;">
-      <div class="card">
-        <h2 class="brand-title" style="font-size: 1.6rem; margin-bottom: 0.5rem;">módulo I & II: o método do bem receber</h2>
-        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">etiqueta, postura, comunicação assertiva e conduta em itacaré</
+      gap: 1
