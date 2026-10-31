@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>o bem receber | consultoria e treinamento</title>
-  <!-- importação da fonte montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --marrom: #3d2c1d;
@@ -31,15 +30,8 @@
       min-height: 100vh;
     }
 
-    /* fontes dedicadas */
     .brand-title {
       font-family: 'Georgia', serif;
-      font-weight: 700;
-      letter-spacing: -1px;
-    }
-
-    h1, h2, h3, h4, th, .btn {
-      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
     }
 
@@ -50,31 +42,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 6px -1px rgba(61,44,29,0.1);
     }
 
     header h1 { font-size: 1.6rem; color: var(--bege); }
     .user-info { font-size: 0.85rem; background: rgba(230,215,195,0.15); padding: 0.3rem 0.9rem; border-radius: 20px; color: var(--bege); }
 
-    .container { max-width: 1100px; margin: auto; padding: 2rem 1rem; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 1000px; margin: auto; padding: 2rem 1rem; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* tela de login descontraída e limpa */
     .login-box {
       width: 100%;
       max-width: 420px;
       background: var(--card-bg);
-      padding: 2.8rem;
+      padding: 2.5rem;
       border-radius: 16px;
-      box-shadow: 0 10px 25px -5px rgba(61,44,29,0.08);
+      box-shadow: 0 10px 25px rgba(61,44,29,0.08);
       border: 1px solid var(--bege);
     }
 
     .login-box h2 { text-align: center; margin-bottom: 0.3rem; color: var(--marrom); font-size: 1.8rem; }
-    .login-box p { text-align: center; font-size: 0.85rem; color: var(--caqui); margin-bottom: 2rem; font-weight: 400; }
+    .login-box p { text-align: center; font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.8rem; }
 
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; color: var(--marrom); }
-    .form-group input, .form-group select, .form-group textarea {
+    .form-group input, .form-group textarea {
       width: 100%;
       padding: 0.8rem 1rem;
       border: 1px solid var(--bege);
@@ -83,14 +73,6 @@
       font-family: 'Montserrat', sans-serif;
       background: var(--aveia);
       color: var(--texto);
-      transition: all 0.2s;
-    }
-
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: var(--caramelo);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(217,155,67,0.15);
     }
 
     .btn {
@@ -103,91 +85,239 @@
       font-weight: 700;
       font-size: 0.95rem;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
       margin-top: 0.5rem;
-      letter-spacing: 0.5px;
     }
 
     .btn:hover { background: var(--caqui); color: white; }
-    .btn-secondary { background: var(--caqui); width: auto; padding: 0.35rem 0.8rem; font-size: 0.8rem; margin-top: 0; }
+    .btn-secondary { background: var(--caqui); width: auto; padding: 0.35rem 0.8rem; font-size: 0.8rem; }
 
-    .quick-access-box {
+    .quick-box {
       margin-top: 1.5rem;
       padding-top: 1.2rem;
       border-top: 1px dashed var(--bege);
       text-align: center;
     }
 
-    .quick-access-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--caqui);
-      margin-bottom: 0.8rem;
-    }
-
-    .quick-btn-group {
-      display: flex;
-      gap: 0.5rem;
-    }
+    .quick-title { font-size: 0.8rem; font-weight: 600; color: var(--caqui); margin-bottom: 0.8rem; }
+    .quick-btns { display: flex; gap: 0.5rem; }
 
     .btn-role {
       flex: 1;
-      padding: 0.6rem 0.4rem;
-      font-size: 0.75rem;
+      padding: 0.7rem 0.4rem;
+      font-size: 0.8rem;
       background: var(--aveia);
       color: var(--marrom);
       border: 1px solid var(--bege);
       border-radius: 6px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    .btn-role:hover {
-      background: var(--caramelo);
-      color: white;
-      border-color: var(--caramelo);
+    .btn-role:hover { background: var(--caramelo); color: white; }
+
+    .nav-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--bege); padding-bottom: 0.5rem; flex-wrap: wrap; }
+    .tab-btn { background: var(--aveia); border: 1px solid var(--bege); padding: 0.6rem 1rem; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--marrom); cursor: pointer; border-radius: 6px; }
+    .tab-btn.active { background: var(--marrom); color: var(--bege); border-color: var(--marrom); }
+
+    .card { background: var(--card-bg); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid var(--bege); width: 100%; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .metric-card { background: var(--aveia); border-left: 4px solid var(--caramelo); padding: 1.2rem; border-radius: 8px; }
+    .metric-card h4 { color: var(--marrom); font-size: 0.8rem; font-weight: 700; }
+    .metric-card .value { font-size: 1.6rem; font-weight: 700; color: var(--marrom); margin-top: 0.3rem; font-family: 'Georgia', serif; }
+
+    .table-container { width: 100%; overflow-x: auto; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid var(--bege); }
+    th { color: var(--marrom); font-weight: 700; background: var(--aveia); }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <header id="appHeader" class="hidden">
+    <h1 class="brand-title">o bem receber</h1>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span class="user-info" id="userInfo">usuário: -</span>
+      <button class="btn btn-secondary" onclick="logout()">sair</button>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- TELA DE LOGIN -->
+    <div id="loginScreen" class="login-box">
+      <h2 class="brand-title">o bem receber</h2>
+      <p>consultoria e treinamento sobre a arte do bem receber</p>
+
+      <div class="form-group">
+        <label>usuário ou e-mail</label>
+        <input type="text" id="username" placeholder="digite seu usuário">
+      </div>
+
+      <div class="form-group">
+        <label>senha</label>
+        <input type="password" id="password" placeholder="••••••••">
+      </div>
+
+      <button class="btn" onclick="enterAs('manager')">entrar</button>
+
+      <div class="quick-box">
+        <p class="quick-title">escolha o perfil para entrar diretamente:</p>
+        <div class="quick-btns">
+          <button class="btn-role" onclick="enterAs('student')">🎓 aluno</button>
+          <button class="btn-role" onclick="enterAs('client')">📊 cliente</button>
+          <button class="btn-role" onclick="enterAs('manager')">🛠️ gestor</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL DO ALUNO -->
+    <div id="studentPanel" class="hidden" style="width: 100%;">
+      <div class="card">
+        <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">módulo I & II: o método do bem receber</h2>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem;">etiqueta, postura, comunicação e conduta em itacaré</p>
+        
+        <div style="margin-bottom: 1rem; background: var(--aveia); padding: 1rem; border-radius: 8px;">
+          <h4 style="color: var(--marrom);">✨ postura & etiqueta visual</h4>
+          <p style="font-size: 0.85rem; color: var(--texto);">contato visual acolhedor, sorriso no olhar e postura descontraída condizente com a hospitalidade de itacaré.</p>
+        </div>
+
+        <div style="margin-bottom: 1rem; background: var(--aveia); padding: 1rem; border-radius: 8px;">
+          <h4 style="color: var(--marrom);">💬 o que falar e como agir</h4>
+          <p style="font-size: 0.85rem; color: var(--texto);">linguagem clara e preventiva. antecipe dúvidas sobre tábuas de maré, trilhas e sugestões gastronômicas.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="brand-title">⚡ quiz de avaliação prática</h3>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-top: 0.5rem;">cliente pergunta sobre a segurança da trilha da prainha. como agir?</p>
+        
+        <button class="btn" style="margin-top: 1rem; width: auto; padding: 0.6rem 1.2rem;" onclick="alert('resposta enviada com sucesso!')">responder quiz</button>
+      </div>
+    </div>
+
+    <!-- PAINEL DO GESTOR E CLIENTE -->
+    <div id="dashboardPanel" class="hidden" style="width: 100%;">
+      
+      <div class="nav-tabs" id="menuTabs">
+        <button class="tab-btn active" onclick="switchTab('tab-empresas')" id="btn-empresas">🏢 adicionar empresas</button>
+        <button class="tab-btn" onclick="switchTab('tab-choque')" id="btn-choque">⚡ treinamento de choque</button>
+        <button class="tab-btn" onclick="switchTab('tab-auditoria')" id="btn-auditoria">🔍 auditoria de chão de fábrica</button>
+        <button class="tab-btn" onclick="switchTab('tab-analise')" id="btn-analise">📊 motor de análise, ihg & roi</button>
+        <button class="tab-btn" onclick="switchTab('tab-relatorios')" id="btn-relatorios">📄 relatórios & ranking</button>
+      </div>
+
+      <!-- ABA EMPRESAS -->
+      <div id="tab-empresas" class="tab-content card">
+        <h3 class="brand-title">alimentar dados das empresas parceiras</h3>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">cadastre hotéis, pousadas e restaurantes em itacaré.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group"><label>nome do estabelecimento</label><input type="text" id="compName" placeholder="ex: pousada mares de itacaré"></div>
+          <div class="form-group"><label>ticket médio estimado (r$)</label><input type="text" id="compTicket" placeholder="ex: 180.00"></div>
+        </div>
+        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="addCompany()">cadastrar empresa</button>
+
+        <div class="table-container">
+          <table>
+            <thead><tr><th>estabelecimento</th><th>ticket médio</th><th>status</th></tr></thead>
+            <tbody id="companyTableBody">
+              <tr><td>pousada mares de itacaré</td><td>r$ 180,00</td><td>em auditoria (30 dias)</td></tr>
+              <tr><td>restaurante cacau & mar</td><td>r$ 240,00</td><td>treinamento de choque aplicado</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ABA TREINAMENTO DE CHOQUE -->
+      <div id="tab-choque" class="tab-content card hidden">
+        <h3 class="brand-title">módulo iii: registro do treinamento de choque</h3>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">documentação do engajamento e teatro da hospitalidade (roleplay).</p>
+        <div class="form-group"><label>observações do comportamento da equipe</label><textarea rows="3" placeholder="anote os líderes positivos e funcionários resistentes..."></textarea></div>
+        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('salvo com sucesso!')">salvar registro</button>
+      </div>
+
+      <!-- ABA AUDITORIA -->
+      <div id="tab-auditoria" class="tab-content card hidden">
+        <h3 class="brand-title">módulo iv: auditoria de chão de fábrica</h3>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">aplicado 15 e 30 dias após o treinamento.</p>
+        <div class="form-group"><label>acolhimento imediato e sorriso no olhar (0 a 10)</label><input type="number" placeholder="ex: 9"></div>
+        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('auditoria salva!')">enviar auditoria</button>
+      </div>
+
+      <!-- ABA ANÁLISE / IHG / ROI -->
+      <div id="tab-analise" class="tab-content card hidden">
+        <h3 class="brand-title">motor de análise e inteligência automática</h3>
+        <div class="dashboard-grid" style="margin-top: 1rem;">
+          <div class="metric-card"><h4>índice de hospitalidade (ihg)</h4><div class="value">91.4%</div></div>
+          <div class="metric-card"><h4>vendas consultivas</h4><div class="value">20% ➔ 65%</div></div>
+          <div class="metric-card"><h4>roi estimado</h4><div class="value">+r$ 14.200/mês</div></div>
+        </div>
+      </div>
+
+      <!-- ABA RELATÓRIOS -->
+      <div id="tab-relatorios" class="tab-content card hidden">
+        <h3 class="brand-title">painel de controle & relatórios executivos</h3>
+        <button class="btn" style="width: auto; margin-top: 1rem; padding: 0.6rem 1.2rem;" onclick="alert('gerando pdf...')">📄 gerar relatório em pdf (1 clique)</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function enterAs(role) {
+      const usernameInput = document.getElementById('username').value;
+      const username = usernameInput ? usernameInput : role;
+
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('appHeader').classList.remove('hidden');
+
+      if (role === 'student') {
+        document.getElementById('studentPanel').classList.remove('hidden');
+        document.getElementById('dashboardPanel').classList.add('hidden');
+        document.getElementById('userInfo').innerText = `aluno: ${username}`;
+      } else if (role === 'client') {
+        document.getElementById('studentPanel').classList.add('hidden');
+        document.getElementById('dashboardPanel').classList.remove('hidden');
+        document.getElementById('userInfo').innerText = `cliente: ${username}`;
+
+        document.getElementById('btn-empresas').style.display = 'none';
+        document.getElementById('btn-choque').style.display = 'none';
+        document.getElementById('btn-auditoria').style.display = 'none';
+        switchTab('tab-analise');
+      } else {
+        document.getElementById('studentPanel').classList.add('hidden');
+        document.getElementById('dashboardPanel').classList.remove('hidden');
+        document.getElementById('userInfo').innerText = `gestor: ${username}`;
+
+        document.getElementById('btn-empresas').style.display = 'inline-block';
+        document.getElementById('btn-choque').style.display = 'inline-block';
+        document.getElementById('btn-auditoria').style.display = 'inline-block';
+        switchTab('tab-empresas');
+      }
     }
 
-    /* navegação horizontal do gestor */
-    .nav-tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--bege);
-      padding-bottom: 0.5rem;
-      flex-wrap: wrap;
+    function logout() {
+      document.getElementById('loginScreen').classList.remove('hidden');
+      document.getElementById('appHeader').classList.add('hidden');
+      document.getElementById('studentPanel').classList.add('hidden');
+      document.getElementById('dashboardPanel').classList.add('hidden');
     }
 
-    .tab-btn {
-      background: transparent;
-      border: none;
-      padding: 0.6rem 1rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--caqui);
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.2s;
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const targetTab = document.getElementById(tabId);
+      if(targetTab) targetTab.classList.remove('hidden');
+      
+      const targetBtn = document.getElementById(tabId.replace('tab-', 'btn-'));
+      if(targetBtn) targetBtn.classList.add('active');
     }
 
-    .tab-btn.active {
-      background: var(--marrom);
-      color: var(--bege);
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 6px -1px rgba(61,44,29,0.03);
-      border: 1px solid var(--bege);
-      width: 100%;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1
+    function addCompany() {
+      const name = document.getElementById('compName').value;
+      const ticket = document.getElementById('compTicket').value;
+      if(!name) { alert('por favor, informe o nome da empresa.'); return; }
+      
+      const tbody = document.getElementById('
