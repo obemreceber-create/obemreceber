@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>o bem receber | consultoria e treinamento</title>
   <!-- importação da fonte montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --marrom: #3d2c1d;
@@ -24,7 +24,7 @@
     body {
       background-color: var(--bg);
       color: var(--texto);
-      font-family: 'montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
       display: flex;
       flex-direction: column;
@@ -33,13 +33,13 @@
 
     /* fontes dedicadas */
     .brand-title {
-      font-family: 'georgia', serif;
+      font-family: 'Georgia', serif;
       font-weight: 700;
       letter-spacing: -1px;
     }
 
     h1, h2, h3, h4, th, .btn {
-      font-family: 'montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 700;
     }
 
@@ -74,19 +74,19 @@
 
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; color: var(--marrom); }
-    .form-group input, .form-group select {
+    .form-group input, .form-group select, .form-group textarea {
       width: 100%;
       padding: 0.8rem 1rem;
       border: 1px solid var(--bege);
       border-radius: 8px;
       font-size: 0.95rem;
-      font-family: 'montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: var(--aveia);
       color: var(--texto);
       transition: all 0.2s;
     }
 
-    .form-group input:focus, .form-group select:focus {
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline: none;
       border-color: var(--caramelo);
       background: #fff;
@@ -125,7 +125,7 @@
       background: transparent;
       border: none;
       padding: 0.6rem 1rem;
-      font-family: 'montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       font-size: 0.9rem;
       color: var(--caqui);
@@ -164,7 +164,7 @@
     }
 
     .metric-card h4 { color: var(--marrom); font-size: 0.8rem; font-weight: 700; }
-    .metric-card .value { font-size: 1.6rem; font-weight: 700; color: var(--marrom); margin-top: 0.3rem; font-family: 'georgia', serif; }
+    .metric-card .value { font-size: 1.6rem; font-weight: 700; color: var(--marrom); margin-top: 0.3rem; font-family: 'Georgia', serif; }
 
     .alert-box {
       background: #fdf8f0;
@@ -179,6 +179,19 @@
     table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid var(--bege); }
     th { color: var(--marrom); font-weight: 700; background: var(--aveia); }
+
+    .quiz-option {
+      display: block;
+      margin: 0.6rem 0;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--bege);
+      border-radius: 8px;
+      cursor: pointer;
+      background: var(--aveia);
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .quiz-option:hover { background: #e2d2be; }
 
     .hidden { display: none !important; }
   </style>
@@ -195,7 +208,8 @@
   </header>
 
   <div class="container" id="mainContainer">
-    <!-- 1 & 2. tela de login com georgia no título e montserrat no subtítulo/inputs -->
+    
+    <!-- 1 & 2. TELA DE LOGIN -->
     <div id="loginScreen" class="login-box">
       <h2 class="brand-title">o bem receber</h2>
       <p>consultoria e treinamento sobre a arte do bem receber</p>
@@ -210,136 +224,20 @@
         <input type="password" id="password" placeholder="••••••••">
       </div>
 
-      <!-- seletor oculto apenas para simulação dos perfis solicitados -->
       <div class="form-group">
-        <label for="simulatedRole">simular perfil de acesso</label>
+        <label for="simulatedRole">perfil de acesso</label>
         <select id="simulatedRole">
-          <option value="manager">gestor (completo: empresas, choque & auditorias)</option>
-          <option value="client">cliente (apenas dados gráficos, roi & relatórios)</option>
-          <option value="student">aluno / colaborador (trilha e quizzes)</option>
+          <option value="student">aluno / colaborador (método, etiqueta & quizzes)</option>
+          <option value="client">cliente (dono/gestor: apenas gráficos & resultados)</option>
+          <option value="manager">gestor / consultor (painel geral & auditoria)</option>
         </select>
       </div>
 
       <button class="btn" onclick="login()">entrar</button>
     </div>
 
-    <!-- 3. painel do gestor / consultor / cliente -->
-    <div id="dashboardPanel" class="hidden" style="width: 100%;">
-      
-      <!-- abas horizontais de navegação -->
-      <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('tab-empresas')" id="btn-empresas">🏢 gerenciar empresas</button>
-        <button class="tab-btn" onclick="switchTab('tab-choque')" id="btn-choque">⚡ treinamento de choque & roleplay</button>
-        <button class="tab-btn" onclick="switchTab('tab-auditoria')" id="btn-auditoria">🔍 auditoria de chão de fábrica</button>
-        <button class="tab-btn" onclick="switchTab('tab-analise')" id="btn-analise">📊 motor de análise, ihg & roi</button>
-        <button class="tab-btn" onclick="switchTab('tab-relatorios')" id="btn-relatorios">📄 relatórios & ranking</button>
-      </div>
-
-      <!-- aba 1: gerenciar empresas -->
-      <div id="tab-empresas" class="tab-content card">
-        <h3 class="brand-title" style="margin-bottom: 0.5rem; font-size: 1.4rem;">alimentar dados das empresas parceiras</h3>
-        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">cadastre hotéis, pousadas e restaurantes em itacaré para planejar a consultoria.</p>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-          <div class="form-group"><label>nome do estabelecimento</label><input type="text" id="compName" placeholder="ex: pousada mares de itacaré"></div>
-          <div class="form-group"><label>ticket médio estimado (r$)</label><input type="text" id="compTicket" placeholder="ex: 180.00"></div>
-        </div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.5rem;" onclick="addCompany()">adicionar empresa à consultoria</button>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr><th>estabelecimento</th><th>ticket médio</th><th>status da consultoria</th><th>ações</th></tr>
-            </thead>
-            <tbody id="companyTableBody">
-              <tr><td>pousada mares de itacaré</td><td>r$ 180,00</td><td>em auditoria (30 dias)</td><td><span style="color: var(--verde-musgo); font-weight: 600;">ativo</span></td></tr>
-              <tr><td>restaurante cacau & mar</td><td>r$ 240,00</td><td>treinamento de choque aplicado</td><td><span style="color: var(--verde-musgo); font-weight: 600;">ativo</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- aba 2: treinamento de choque & roleplay -->
-      <div id="tab-choque" class="tab-content card hidden">
-        <h3 class="brand-title" style="margin-bottom: 0.5rem; font-size: 1.4rem;">módulo iii: registro do treinamento de choque</h3>
-        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">documentação do engajamento e desempenho presencial da equipe.</p>
-        
-        <div class="form-group">
-          <label>presença e adesão da equipe</label>
-          <select><option>100% presente e engajada</option><option>parcial (faltas justificadas)</option><option>resistência inicial detectada</option></select>
-        </div>
-        <div class="form-group">
-          <label>performance no "teatro da hospitalidade" (roleplay)</label>
-          <textarea rows="3" style="width:100%; padding:0.8rem; border-radius:8px; border:1px solid var(--bege); background: var(--aveia); font-family:'montserrat';" placeholder="anote as notas individuais ou por setor nas encenações de postura e atendimento..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>observações de comportamento</label>
-          <textarea rows="3" style="width:100%; padding:0.8rem; border-radius:8px; border:1px solid var(--bege); background: var(--aveia); font-family:'montserrat';" placeholder="anote quem são os líderes positivos e os funcionários resistentes..."></textarea>
-        </div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.5rem;" onclick="alert('registro de choque salvo com sucesso!')">salvar registro de choque</button>
-      </div>
-
-      <!-- aba 3: auditoria de chão de fábrica -->
-      <div id="tab-auditoria" class="tab-content card hidden">
-        <h3 class="brand-title" style="margin-bottom: 0.5rem; font-size: 1.4rem;">módulo iv: auditoria de chão de fábrica (pós-treinamento)</h3>
-        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">formulário aplicado 15 e 30 dias após a intervenção para medir retenção.</p>
-        
-        <div class="form-group">
-          <label>1. acolhimento imediato e sorriso no olhar (nota 0 a 10)</label>
-          <input type="number" min="0" max="10" placeholder="ex: 9">
-        </div>
-        <div class="form-group">
-          <label>2. domínio de informações sobre itacaré e roteiros locais</label>
-          <select><option>excelente</option><option>satisfatório</option><option>insuficiente</option></select>
-        </div>
-        <div class="form-group">
-          <label>3. aplicação de técnica de venda consultiva</label>
-          <select><option>sim, aplicou com naturalidade</option><option>parcialmente</option><option>não aplicada</option></select>
-        </div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.5rem;" onclick="alert('auditoria enviada para o motor de inteligência!')">enviar auditoria</button>
-      </div>
-
-      <!-- aba 4: motor de análise, ihg & roi -->
-      <div id="tab-analise" class="tab-content card hidden">
-        <h3 class="brand-title" style="margin-bottom: 0.5rem; font-size: 1.4rem;">motor de análise e inteligência automática</h3>
-        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">cruzamento de dados do diagnóstico inicial com as auditorias pós-intervenção.</p>
-
-        <div class="dashboard-grid">
-          <div class="metric-card">
-            <h4>índice de hospitalidade geral (ihg)</h4>
-            <div class="value">91.4%</div>
-          </div>
-          <div class="metric-card">
-            <h4>evolução de vendas consultivas</h4>
-            <div class="value">20% ➔ 65%</div>
-          </div>
-          <div class="metric-card">
-            <h4>roi estimado no faturamento</h4>
-            <div class="value">+r$ 14.200/mês</div>
-          </div>
-        </div>
-
-        <div class="alert-box">
-          <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">⚠️ alerta de zona de risco inteligente</h4>
-          <p style="font-size: 0.9rem; color: var(--texto);">"atenção: a equipe da pousada mares de itacaré voltou a apresentar sintomas de desatenção no contato visual após 30 dias. recomenda-se reforço tático imediato."</p>
-        </div>
-      </div>
-
-      <!-- aba 5: relatórios & ranking -->
-      <div id="tab-relatorios" class="tab-content card hidden">
-        <h3 class="brand-title" style="margin-bottom: 0.5rem; font-size: 1.4rem;">painel de controle & relatórios executivos</h3>
-        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">mapa visual de clientes, ranking de desempenho e exportação instantânea.</p>
-
-        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-          <button class="btn" style="width: auto;" onclick="alert('gerando relatório executivo em pdf...')">📄 gerar relatório em pdf (1 clique)</button>
-          <button class="btn btn-secondary" style="width: auto;" onclick="alert('enviando por e-mail para o gestor...')">📧 enviar relatório por e-mail</button>
-        </div>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr><th>ranking</th><th>estabelecimento</th><th>ihg atual</th><th>status de desempenho</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>1º</td><td>restaurante cacau & mar</td><td>96%</td><td><span style="color: var(--verde-musgo); font-weight: 700;">excelência total</span></td></tr>
-              <tr><td>2º</td><td>pousada mares de itacaré</td><td>84%</td><td><span style="color: var(--caramelo); font-weight: 700;">atenção / zona de risco</span></td></tr>
+    <!-- 3A. PAINEL DO ALUNO / COLABORADOR -->
+    <div id="studentPanel" class="hidden" style="width: 100%;">
+      <div class="card">
+        <h2 class="brand-title" style="font-size: 1.6rem; margin-bottom: 0.5rem;">módulo I & II: o método do bem receber</h2>
+        <p style="font-size: 0.9rem; color: var(--caqui); margin-bottom: 1.5rem;">etiqueta, postura, comunicação assertiva e conduta em itacaré</
