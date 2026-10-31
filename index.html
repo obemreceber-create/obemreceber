@@ -46,12 +46,11 @@
     header h1 { font-size: 1.6rem; color: var(--bege); }
     .user-info { font-size: 0.85rem; background: rgba(230,215,195,0.15); padding: 0.3rem 0.9rem; border-radius: 20px; color: var(--bege); }
 
-    .container { max-width: 1000px; margin: auto; padding: 2rem 1rem; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 1200px; margin: auto; padding: 2rem 1rem; width: 100%; flex: 1; }
 
-    /* Caixa de login ajustada para manter o subtítulo em uma linha só */
     .login-box {
-      width: 100%;
       max-width: 480px;
+      margin: auto;
       background: var(--card-bg);
       padding: 2.5rem;
       border-radius: 16px;
@@ -60,8 +59,6 @@
     }
 
     .login-box h2 { text-align: center; margin-bottom: 0.3rem; color: var(--marrom); font-size: 1.8rem; }
-    
-    /* Força o texto em uma linha só */
     .login-box p.subtitle {
       text-align: center;
       font-size: 0.85rem;
@@ -72,7 +69,7 @@
 
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; color: var(--marrom); }
-    .form-group input, .form-group textarea {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
       padding: 0.8rem 1rem;
       border: 1px solid var(--bege);
@@ -108,7 +105,6 @@
     .quick-title { font-size: 0.8rem; font-weight: 600; color: var(--caqui); margin-bottom: 0.8rem; }
     .quick-btns { display: flex; gap: 0.5rem; }
 
-    /* Botões de atalho sem emojis */
     .btn-role {
       flex: 1;
       padding: 0.8rem 0.4rem;
@@ -124,9 +120,45 @@
 
     .btn-role:hover { background: var(--caramelo); color: white; border-color: var(--caramelo); }
 
-    .nav-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--bege); padding-bottom: 0.5rem; flex-wrap: wrap; }
-    .tab-btn { background: var(--aveia); border: 1px solid var(--bege); padding: 0.6rem 1rem; font-weight: 600; font-size: 0.85rem; color: var(--marrom); cursor: pointer; border-radius: 6px; }
-    .tab-btn.active { background: var(--marrom); color: var(--bege); border-color: var(--marrom); }
+    /* LAYOUT DO GESTOR COM BARRA LATERAL */
+    .manager-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.5rem;
+    }
+
+    .sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--bege);
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: fit-content;
+    }
+
+    .sidebar h3 { font-size: 0.95rem; color: var(--marrom); margin-bottom: 1rem; border-bottom: 2px solid var(--bege); padding-bottom: 0.5rem; }
+
+    .sub-menu { list-style: none; margin-bottom: 1.5rem; }
+    .sub-menu li {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+      color: var(--caqui);
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.2s;
+      margin-bottom: 0.3rem;
+    }
+    .sub-menu li:hover, .sub-menu li.active {
+      background: var(--aveia);
+      color: var(--marrom);
+    }
+
+    .content-area { background: var(--card-bg); border: 1px solid var(--bege); border-radius: 12px; padding: 2rem; min-height: 500px; }
+    .form-section { display: none; }
+    .form-section.active { display: block; }
+
+    .section-title { font-size: 1.2rem; color: var(--marrom); margin-bottom: 0.5rem; font-family: 'Georgia', serif; }
+    .section-desc { font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem; }
 
     .card { background: var(--card-bg); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid var(--bege); width: 100%; }
     .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
@@ -142,7 +174,7 @@
 </head>
 <body>
 
-  <!-- CABEÇALHO DA APLICAÇÃO -->
+  <!-- CABEÇALHO -->
   <header id="appHeader" style="display: none;">
     <h1 class="brand-title">o bem receber</h1>
     <div style="display: flex; align-items: center; gap: 1rem;">
@@ -153,7 +185,7 @@
 
   <div class="container">
     
-    <!-- TELA DE LOGIN (CAPA INICIAL) -->
+    <!-- TELA DE LOGIN -->
     <div id="loginScreen" class="login-box">
       <h2 class="brand-title">o bem receber</h2>
       <p class="subtitle">consultoria e treinamento sobre a arte do bem receber</p>
@@ -170,7 +202,6 @@
 
       <button class="btn" onclick="openProfile('manager')">entrar</button>
 
-      <!-- BOTÕES DIRETOS SEM EMOJIS -->
       <div class="quick-box">
         <p class="quick-title">escolha o perfil para entrar diretamente:</p>
         <div class="quick-btns">
@@ -181,7 +212,7 @@
       </div>
     </div>
 
-    <!-- 1. PAINEL DO ALUNO / COLABORADOR -->
+    <!-- PAINEL DO ALUNO -->
     <div id="studentPanel" style="display: none; width: 100%;">
       <div class="card">
         <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">módulo I & II: o método do bem receber</h2>
@@ -191,162 +222,93 @@
           <h4 style="color: var(--marrom);">postura & etiqueta visual</h4>
           <p style="font-size: 0.85rem; color: var(--texto);">contato visual acolhedor, sorriso no olhar e postura descontraída condizente com a hospitalidade de itacaré.</p>
         </div>
-
-        <div style="margin-bottom: 1rem; background: var(--aveia); padding: 1rem; border-radius: 8px;">
-          <h4 style="color: var(--marrom);">o que falar e como agir</h4>
-          <p style="font-size: 0.85rem; color: var(--texto);">linguagem clara, respeitosa e preventiva. antecipe dúvidas sobre tábuas de maré, trilhas e sugestões gastronômicas.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3 class="brand-title">quiz de avaliação prática</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-top: 0.5rem;">um cliente pergunta sobre a segurança da trilha da prainha. qual a melhor conduta?</p>
-        <button class="btn" style="margin-top: 1rem; width: auto; padding: 0.6rem 1.2rem;" onclick="alert('resposta registrada no sistema!')">responder quiz</button>
       </div>
     </div>
 
-    <!-- 2 & 3. PAINEL DO GESTOR E DO CLIENTE -->
+    <!-- PAINEL DO GESTOR ( COM MENU LATERAL E SUBCATEGORIAS DE CADASTRO ) -->
     <div id="dashboardPanel" style="display: none; width: 100%;">
-      
-      <!-- MENU DE ABAS HORIZONTAIS -->
-      <div class="nav-tabs" id="menuTabs">
-        <button class="tab-btn active" onclick="showTab('tab-empresas', this)" id="btn-empresas">adicionar empresas</button>
-        <button class="tab-btn" onclick="showTab('tab-choque', this)" id="btn-choque">treinamento de choque</button>
-        <button class="tab-btn" onclick="showTab('tab-auditoria', this)" id="btn-auditoria">auditoria de chão de fábrica</button>
-        <button class="tab-btn" onclick="showTab('tab-analise', this)" id="btn-analise">motor de análise, ihg & roi</button>
-        <button class="tab-btn" onclick="showTab('tab-relatorios', this)" id="btn-relatorios">relatórios & ranking</button>
-      </div>
+      <div class="manager-layout">
+        
+        <!-- BARRA LATERAL -->
+        <div class="sidebar">
+          <h3>cadastro de empresa</h3>
+          <ul class="sub-menu">
+            <li class="active" onclick="showSubSection('sec-dados', this)">1. dados institucionais</li>
+            <li onclick="showSubSection('sec-operacao', this)">2. operação & atendimento</li>
+            <li onclick="showSubSection('sec-pessoas', this)">3. gestão de pessoas</li>
+            <li onclick="showSubSection('sec-comercial', this)">4. dados comerciais & faturamento</li>
+            <li onclick="showSubSection('sec-gargalos', this)">5. principais gargalos</li>
+          </ul>
 
-      <!-- ABA: ADICIONAR EMPRESAS -->
-      <div id="tab-empresas" class="tab-content card">
-        <h3 class="brand-title">alimentar dados das empresas parceiras</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">cadastre hotéis, pousadas e restaurantes em itacaré para planejar a consultoria.</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-          <div class="form-group"><label>nome do estabelecimento</label><input type="text" id="compName" placeholder="ex: pousada mares de itacaré"></div>
-          <div class="form-group"><label>ticket médio estimado (r$)</label><input type="text" id="compTicket" placeholder="ex: 180.00"></div>
+          <h3>inteligência da consultoria</h3>
+          <ul class="sub-menu">
+            <li onclick="showSubSection('sec-plano-treinamento', this)">🎯 plano de treinamento prático</li>
+            <li onclick="showSubSection('sec-analise', this)">📊 motor de análise, ihg & roi</li>
+            <li onclick="showSubSection('sec-relatorios', this)">📄 relatórios & ranking</li>
+          </ul>
         </div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="addCompany()">cadastrar empresa</button>
 
-        <div class="table-container">
-          <table>
-            <thead><tr><th>estabelecimento</th><th>ticket médio</th><th>status</th></tr></thead>
-            <tbody id="companyTableBody">
-              <tr><td>pousada mares de itacaré</td><td>r$ 180,00</td><td>em auditoria (30 dias)</td></tr>
-              <tr><td>restaurante cacau & mar</td><td>r$ 240,00</td><td>treinamento de choque aplicado</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        <!-- ÁREA DE CONTEÚDO DINÂMICO -->
+        <div class="content-area">
+          
+          <!-- Subcategoria 1: Dados Institucionais -->
+          <div id="sec-dados" class="form-section active">
+            <h2 class="section-title">dados cadastrais e institucionais</h2>
+            <p class="section-desc">identificação, razão social, cnpj e contatos principais do estabelecimento.</p>
+            <div class="form-group"><label>razão social e cnpj</label><input type="text" placeholder="ex: pousada mares ltda - 00.000.000/0001-00"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group"><label>telefone / whatsapp</label><input type="text" placeholder="(73) 99999-9999"></div>
+              <div class="form-group"><label>e-mail de contato</label><input type="text" placeholder="contato@pousada.com"></div>
+            </div>
+            <div class="form-group"><label>responsável / gestor principal</label><input type="text" placeholder="nome do gerente ou dono"></div>
+            <button class="btn" style="width: auto;" onclick="alert('dados institucionais salvos!')">salvar dados institucionais</button>
+          </div>
 
-      <!-- ABA: TREINAMENTO DE CHOQUE -->
-      <div id="tab-choque" class="tab-content card" style="display: none;">
-        <h3 class="brand-title">módulo iii: registro do treinamento de choque</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">documentação do engajamento e teatro da hospitalidade (roleplay).</p>
-        <div class="form-group"><label>observações do comportamento da equipe</label><textarea rows="3" placeholder="anote os líderes positivos e funcionários resistentes..."></textarea></div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('salvo com sucesso!')">salvar registro de choque</button>
-      </div>
+          <!-- Subcategoria 2: Operação e Atendimento -->
+          <div id="sec-operacao" class="form-section">
+            <h2 class="section-title">dados de operação e atendimento (jornada do cliente)</h2>
+            <p class="section-desc">tma, avaliações externas (tripadvisor/google), pops e volume de atendimento.</p>
+            <div class="form-group"><label>tempo médio de atendimento (tma)</label><input type="text" placeholder="ex: tempo de check-in ou entrega de prato"></div>
+            <div class="form-group"><label>avaliações e pesquisas de satisfação (notas atuais)</label><input type="text" placeholder="ex: nota 4.2 no google / booking 8.9"></div>
+            <div class="form-group"><label>manuais de processos (pops existentes)</label><textarea rows="2" placeholder="descreva se há pops na recepção, salão ou governança..."></textarea></div>
+            <div class="form-group"><label>volume de atendimentos / horários de pico</label><input type="text" placeholder="ex: ocupação máxima nos fins de semana das 19h às 22h"></div>
+            <button class="btn" style="width: auto;" onclick="alert('dados operacionais salvos!')">salvar dados operacionais</button>
+          </div>
 
-      <!-- ABA: AUDITORIA -->
-      <div id="tab-auditoria" class="tab-content card" style="display: none;">
-        <h3 class="brand-title">módulo iv: auditoria de chão de fábrica</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">formulário aplicado 15 e 30 dias após o treinamento para medir a retenção.</p>
-        <div class="form-group"><label>acolhimento imediato e sorriso no olhar (0 a 10)</label><input type="number" placeholder="ex: 9"></div>
-        <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="alert('auditoria enviada com sucesso!')">enviar auditoria</button>
-      </div>
+          <!-- Subcategoria 3: Gestão de Pessoas -->
+          <div id="sec-pessoas" class="form-section">
+            <h2 class="section-title">dados de gestão de pessoas (equipe)</h2>
+            <p class="section-desc">organograma, escalas, taxa de rotatividade (turnover) e remuneração/gorjetas.</p>
+            <div class="form-group"><label>organograma e escalas de turnos</label><input type="text" placeholder="ex: 4 garçons, 2 recepcionistas, folgas às terças"></div>
+            <div class="form-group"><label>taxa de rotatividade (turnover)</label><input type="text" placeholder="ex: alta rotatividade de cumins nos últimos 6 meses"></div>
+            <div class="form-group"><label>modelo de remuneração (taxa de serviço / 10%)</label><input type="text" placeholder="ex: divisão integral de 10% repassada à equipa + metas"></div>
+            <button class="btn" style="width: auto;" onclick="alert('dados de RH salvos!')">salvar dados de pessoas</button>
+          </div>
 
-      <!-- ABA: MOTOR DE ANÁLISE, IHG & ROI -->
-      <div id="tab-analise" class="tab-content card" style="display: none;">
-        <h3 class="brand-title">motor de análise e inteligência automática</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">cruzamento de dados do diagnóstico inicial com as auditorias.</p>
-        <div class="dashboard-grid" style="margin-top: 1rem;">
-          <div class="metric-card"><h4>índice de hospitalidade geral (ihg)</h4><div class="value">91.4%</div></div>
-          <div class="metric-card"><h4>vendas consultivas</h4><div class="value">20% ➔ 65%</div></div>
-          <div class="metric-card"><h4>roi estimado no faturamento</h4><div class="value">+r$ 14.200/mês</div></div>
-        </div>
-      </div>
+          <!-- Subcategoria 4: Dados Comerciais e de Faturamento -->
+          <div id="sec-comercial" class="form-section">
+            <h2 class="section-title">dados comerciais e de faturamento</h2>
+            <p class="section-desc">ticket médio, curva abc de produtos e stack de tecnologias utilizadas.</p>
+            <div class="form-group"><label>ticket médio / diária média (adr ou revpar)</label><input type="text" placeholder="ex: ticket médio de r$ 180 por mesa"></div>
+            <div class="form-group"><label>curva abc de produtos (mais vendidos)</label><input type="text" placeholder="ex: peixe ao molho de cacau, drinks tropicais"></div>
+            <div class="form-group"><label>sistemas utilizados (tech stack - pms / pos)</label><input type="text" placeholder="ex: sistema consumer / touch / cardápio digital"></div>
+            <button class="btn" style="width: auto;" onclick="alert('dados comerciais salvos!')">salvar dados comerciais</button>
+          </div>
 
-      <!-- ABA: RELATÓRIOS & RANKING -->
-      <div id="tab-relatorios" class="tab-content card" style="display: none;">
-        <h3 class="brand-title">painel de controle & relatórios executivos</h3>
-        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1rem;">mapa visual de clientes e exportação em 1 clique.</p>
-        <button class="btn" style="width: auto; margin-top: 0.5rem; padding: 0.6rem 1.2rem;" onclick="alert('gerando relatório em pdf...')">gerar relatório em pdf (1 clique)</button>
-      </div>
+          <!-- Subcategoria 5: Principais Gargalos -->
+          <div id="sec-gargalos" class="form-section">
+            <h2 class="section-title">principais gargalos (o que precisa melhorar?)</h2>
+            <p class="section-desc">reclamações recorrentes e motivação principal do projeto de consultoria.</p>
+            <div class="form-group"><label>reclamações recorrentes</label><textarea rows="2" placeholder="ex: demora na entrega de pratos nos horários de pico, falta de cortesia..."></textarea></div>
+            <div class="form-group"><label>motivação do projeto / objetivo principal</label><textarea rows="2" placeholder="ex: padronizar o atendimento para abrir filial ou aumentar vendas de sobremesas..."></textarea></div>
+            <button class="btn" style="width: auto;" onclick="alert('gargalos salvos com sucesso!')">salvar gargalos</button>
+          </div>
 
-    </div>
-  </div>
-
-  <script>
-    function openProfile(role) {
-      const usernameInput = document.getElementById('username').value;
-      const name = usernameInput ? usernameInput : role;
-
-      // Oculta login e exibe topo
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('appHeader').style.display = 'flex';
-
-      // Oculta painéis
-      document.getElementById('studentPanel').style.display = 'none';
-      document.getElementById('dashboardPanel').style.display = 'none';
-
-      if (role === 'student') {
-        document.getElementById('studentPanel').style.display = 'block';
-        document.getElementById('userInfo').innerText = 'aluno: ' + name;
-      } 
-      else if (role === 'client') {
-        document.getElementById('dashboardPanel').style.display = 'block';
-        document.getElementById('userInfo').innerText = 'cliente: ' + name;
-
-        // Cliente vê apenas o motor de análise / ROI
-        document.getElementById('btn-empresas').style.display = 'none';
-        document.getElementById('btn-choque').style.display = 'none';
-        document.getElementById('btn-auditoria').style.display = 'none';
-        showTab('tab-analise', document.getElementById('btn-analise'));
-      } 
-      else {
-        document.getElementById('dashboardPanel').style.display = 'block';
-        document.getElementById('userInfo').innerText = 'gestor: ' + name;
-
-        // Gestor vê todas as abas
-        document.getElementById('btn-empresas').style.display = 'inline-block';
-        document.getElementById('btn-choque').style.display = 'inline-block';
-        document.getElementById('btn-auditoria').style.display = 'inline-block';
-        showTab('tab-empresas', document.getElementById('btn-empresas'));
-      }
-    }
-
-    function logout() {
-      document.getElementById('loginScreen').style.display = 'block';
-      document.getElementById('appHeader').style.display = 'none';
-      document.getElementById('studentPanel').style.display = 'none';
-      document.getElementById('dashboardPanel').style.display = 'none';
-    }
-
-    function showTab(tabId, btnElement) {
-      const tabs = document.querySelectorAll('.tab-content');
-      tabs.forEach(tab => tab.style.display = 'none');
-
-      const btns = document.querySelectorAll('.tab-btn');
-      btns.forEach(b => b.classList.remove('active'));
-
-      const targetTab = document.getElementById(tabId);
-      if(targetTab) targetTab.style.display = 'block';
-      if(btnElement) btnElement.classList.add('active');
-    }
-
-    function addCompany() {
-      const name = document.getElementById('compName').value;
-      const ticket = document.getElementById('compTicket').value;
-      if(!name) { alert('por favor, informe o nome da empresa.'); return; }
-      
-      const tbody = document.getElementById('companyTableBody');
-      const row = document.createElement('tr');
-      row.innerHTML = '<td>' + name + '</td><td>r$ ' + (ticket || '0,00') + '</td><td>cadastrada</td>';
-      tbody.appendChild(row);
-      
-      document.getElementById('compName').value = '';
-      document.getElementById('compTicket').value = '';
-      alert('empresa cadastrada com sucesso!');
-    }
-  </script>
-</body>
-</html>
+          <!-- PLANO DE TREINAMENTO PRÁTICO (GERADO PELA CONSULTORIA) -->
+          <div id="sec-plano-treinamento" class="form-section">
+            <h2 class="section-title">🎯 plano de treinamento de atendimento</h2>
+            <p class="section-desc">diretrizes práticas geradas com base nos dados e gargalos mapeados para aplicar com a equipe.</p>
+            
+            <div style="background: var(--aveia); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--caramelo);">
+              <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">foco 1: correção de gargalos de tempo (tma)</h4>
+              <p style="font-size: 0.85rem; color: var(--texto);">como a pesquisa indicou demora nos horários de pico,
