@@ -225,7 +225,7 @@
       </div>
     </div>
 
-    <!-- PAINEL DO GESTOR ( COM MENU LATERAL E SUBCATEGORIAS DE CADASTRO ) -->
+    <!-- PAINEL DO GESTOR -->
     <div id="dashboardPanel" style="display: none; width: 100%;">
       <div class="manager-layout">
         
@@ -304,11 +304,89 @@
             <button class="btn" style="width: auto;" onclick="alert('gargalos salvos com sucesso!')">salvar gargalos</button>
           </div>
 
-          <!-- PLANO DE TREINAMENTO PRÁTICO (GERADO PELA CONSULTORIA) -->
+          <!-- PLANO DE TREINAMENTO PRÁTICO -->
           <div id="sec-plano-treinamento" class="form-section">
             <h2 class="section-title">🎯 plano de treinamento de atendimento</h2>
             <p class="section-desc">diretrizes práticas geradas com base nos dados e gargalos mapeados para aplicar com a equipe.</p>
             
             <div style="background: var(--aveia); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--caramelo);">
               <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">foco 1: correção de gargalos de tempo (tma)</h4>
-              <p style="font-size: 0.85rem; color: var(--texto);">como a pesquisa indicou demora nos horários de pico,
+              <p style="font-size: 0.85rem; color: var(--texto);">como a pesquisa indicou demora nos horários de pico, o treinamento de etiqueta exigirá a técnica de <em>gestão de expectativas</em>: o colaborador deve avisar o cliente sobre o tempo de preparo com simpatia nos primeiros 2 minutos.</p>
+            </div>
+
+            <div style="background: var(--aveia); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--verde-musgo);">
+              <h4 style="color: var(--marrom); margin-bottom: 0.3rem;">foco 2: venda consultiva (curva abc)</h4>
+              <p style="font-size: 0.85rem; color: var(--texto);">treinar a equipa de salão/recepção a destacar ativamente os produtos da curva abc de maior margem (ex: drinks tropicais e pratos regionais de cacau) usando o "sorriso no olhar" e escuta ativa.</p>
+            </div>
+            
+            <button class="btn" style="width: auto;" onclick="alert('plano de treinamento exportado para PDF!')">📄 gerar plano de treinamento em pdf</button>
+          </div>
+
+          <!-- Motor de Análise, IHG & ROI -->
+          <div id="sec-analise" class="form-section">
+            <h2 class="section-title">motor de análise, ihg & roi</h2>
+            <p class="section-desc">cruzamento de dados do diagnóstico inicial com as auditorias pós-intervenção.</p>
+            <div class="dashboard-grid">
+              <div class="metric-card"><h4>índice de hospitalidade geral (ihg)</h4><div class="value">91.4%</div></div>
+              <div class="metric-card"><h4>evolução vendas consultivas</h4><div class="value">20% ➔ 65%</div></div>
+              <div class="metric-card"><h4>roi estimado no faturamento</h4><div class="value">+r$ 14.200/mês</div></div>
+            </div>
+          </div>
+
+          <!-- Relatórios & Ranking -->
+          <div id="sec-relatorios" class="form-section">
+            <h2 class="section-title">relatórios & ranking de clientes</h2>
+            <p class="section-desc">mapa visual de estabelecimentos assessorados pela consultoria.</p>
+            <button class="btn" style="width: auto;" onclick="alert('gerando relatório executivo em pdf...')">📄 gerar relatório executivo em pdf</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function openProfile(role) {
+      const usernameInput = document.getElementById('username').value;
+      const name = usernameInput ? usernameInput : role;
+
+      // Oculta a tela de login
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('appHeader').style.display = 'flex';
+
+      // Reseta e esconde ambos os painéis
+      document.getElementById('studentPanel').style.display = 'none';
+      document.getElementById('dashboardPanel').style.display = 'none';
+
+      // Abre o painel correto de acordo com o botão clicado
+      if (role === 'student') {
+        document.getElementById('studentPanel').style.display = 'block';
+        document.getElementById('userInfo').innerText = 'aluno: ' + name;
+      } else {
+        document.getElementById('dashboardPanel').style.display = 'block';
+        document.getElementById('userInfo').innerText = 'gestor / cliente: ' + name;
+      }
+    }
+
+    function logout() {
+      document.getElementById('loginScreen').style.display = 'block';
+      document.getElementById('appHeader').style.display = 'none';
+      document.getElementById('studentPanel').style.display = 'none';
+      document.getElementById('dashboardPanel').style.display = 'none';
+    }
+
+    function showSubSection(sectionId, menuElement) {
+      const sections = document.querySelectorAll('.form-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      const menuItems = document.querySelectorAll('.sub-menu li');
+      menuItems.forEach(item => item.classList.remove('active'));
+
+      document.getElementById(sectionId).classList.add('active');
+      if(menuElement) menuElement.classList.add('active');
+    }
+  </script>
+</body>
+</html>
