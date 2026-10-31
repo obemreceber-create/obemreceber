@@ -225,19 +225,38 @@
       </div>
     </div>
 
+    <!-- PAINEL DO CLIENTE (DADOS GRÁFICOS, RESULTADOS E ROI) -->
+    <div id="clientPanel" style="display: none; width: 100%;">
+      <div class="card">
+        <h2 class="brand-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">painel de resultados & desempenho</h2>
+        <p style="font-size: 0.85rem; color: var(--caqui); margin-bottom: 1.5rem;">acompanhamento dos índices de hospitalidade e retorno sobre o investimento da consultoria.</p>
+        
+        <div class="dashboard-grid">
+          <div class="metric-card"><h4>índice de hospitalidade geral (ihg)</h4><div class="value">93.2%</div></div>
+          <div class="metric-card"><h4>evolução de vendas consultivas</h4><div class="value">25% ➔ 70%</div></div>
+          <div class="metric-card"><h4>roi estimado no faturamento</h4><div class="value">+r$ 16.500/mês</div></div>
+        </div>
+
+        <div style="background: var(--aveia); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+          <h4 style="color: var(--marrom); margin-bottom: 0.5rem;">📊 resumo das avaliações recentes</h4>
+          <p style="font-size: 0.9rem; color: var(--texto);">sua equipe demonstrou excelente retenção nas auditorias de 30 dias após o treinamento de choque. o acolhimento presencial atingiu nota máxima de excelência.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- PAINEL DO GESTOR -->
     <div id="dashboardPanel" style="display: none; width: 100%;">
       <div class="manager-layout">
         
-        <!-- BARRA LATERAL -->
-        <div class="sidebar">
+        <!-- BARRA LATERAL (SEM NUMERAÇÃO) -->
+        <div class="sidebar" id="gestorSidebar">
           <h3>cadastro de empresa</h3>
           <ul class="sub-menu">
-            <li class="active" onclick="showSubSection('sec-dados', this)">1. dados institucionais</li>
-            <li onclick="showSubSection('sec-operacao', this)">2. operação & atendimento</li>
-            <li onclick="showSubSection('sec-pessoas', this)">3. gestão de pessoas</li>
-            <li onclick="showSubSection('sec-comercial', this)">4. dados comerciais & faturamento</li>
-            <li onclick="showSubSection('sec-gargalos', this)">5. principais gargalos</li>
+            <li class="active" onclick="showSubSection('sec-dados', this)">dados institucionais</li>
+            <li onclick="showSubSection('sec-operacao', this)">operação & atendimento</li>
+            <li onclick="showSubSection('sec-pessoas', this)">gestão de pessoas</li>
+            <li onclick="showSubSection('sec-comercial', this)">dados comerciais & faturamento</li>
+            <li onclick="showSubSection('sec-gargalos', this)">principais gargalos</li>
           </ul>
 
           <h3>inteligência da consultoria</h3>
@@ -251,15 +270,26 @@
         <!-- ÁREA DE CONTEÚDO DINÂMICO -->
         <div class="content-area">
           
-          <!-- Subcategoria 1: Dados Institucionais -->
+          <!-- Subcategoria 1: Dados Institucionais (Razão Social e CNPJ separados) -->
           <div id="sec-dados" class="form-section active">
             <h2 class="section-title">dados cadastrais e institucionais</h2>
             <p class="section-desc">identificação, razão social, cnpj e contatos principais do estabelecimento.</p>
-            <div class="form-group"><label>razão social e cnpj</label><input type="text" placeholder="ex: pousada mares ltda - 00.000.000/0001-00"></div>
+            
+            <div class="form-group">
+              <label>razão social</label>
+              <input type="text" placeholder="ex: pousada mares de itacaré ltda">
+            </div>
+
+            <div class="form-group">
+              <label>cnpj</label>
+              <input type="text" placeholder="ex: 00.000.000/0001-00">
+            </div>
+
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="form-group"><label>telefone / whatsapp</label><input type="text" placeholder="(73) 99999-9999"></div>
               <div class="form-group"><label>e-mail de contato</label><input type="text" placeholder="contato@pousada.com"></div>
             </div>
+            
             <div class="form-group"><label>responsável / gestor principal</label><input type="text" placeholder="nome do gerente ou dono"></div>
             <button class="btn" style="width: auto;" onclick="alert('dados institucionais salvos!')">salvar dados institucionais</button>
           </div>
@@ -352,21 +382,25 @@
       const usernameInput = document.getElementById('username').value;
       const name = usernameInput ? usernameInput : role;
 
-      // Oculta a tela de login
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('appHeader').style.display = 'flex';
-
-      // Reseta e esconde ambos os painéis
+      
+      // Esconde todos os painéis inicialmente
       document.getElementById('studentPanel').style.display = 'none';
+      document.getElementById('clientPanel').style.display = 'none';
       document.getElementById('dashboardPanel').style.display = 'none';
 
-      // Abre o painel correto de acordo com o botão clicado
       if (role === 'student') {
         document.getElementById('studentPanel').style.display = 'block';
         document.getElementById('userInfo').innerText = 'aluno: ' + name;
+      } else if (role === 'client') {
+        // Painel exclusivo do cliente (apenas gráficos, resultados e ROI)
+        document.getElementById('clientPanel').style.display = 'block';
+        document.getElementById('userInfo').innerText = 'cliente: ' + name;
       } else {
+        // Painel completo do gestor
         document.getElementById('dashboardPanel').style.display = 'block';
-        document.getElementById('userInfo').innerText = 'gestor / cliente: ' + name;
+        document.getElementById('userInfo').innerText = 'gestor: ' + name;
       }
     }
 
@@ -374,12 +408,13 @@
       document.getElementById('loginScreen').style.display = 'block';
       document.getElementById('appHeader').style.display = 'none';
       document.getElementById('studentPanel').style.display = 'none';
+      document.getElementById('clientPanel').style.display = 'none';
       document.getElementById('dashboardPanel').style.display = 'none';
     }
 
     function showSubSection(sectionId, menuElement) {
       const sections = document.querySelectorAll('.form-section');
-      sections.forEach(sec => sec.classList.remove('active'));
+      sections.forEach(sec => sec.classList.not ? sec.classList.remove('active') : sec.classList.remove('active'));
 
       const menuItems = document.querySelectorAll('.sub-menu li');
       menuItems.forEach(item => item.classList.remove('active'));
